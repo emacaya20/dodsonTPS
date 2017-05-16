@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html>
+    <!--
+  * Please see the included README.md file for license terms and conditions.
+  -->
+
+    <head>
+        <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css">
+        <meta charset="UTF-8">
+        <title>Dodson TPS</title>
+        <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+
+        <!--
+  * The "meta viewport" tag (below) helps your app size appropriately to a device's ideal viewport.
+  * Note that Windows device viewports work better when initialized using the @viewport CSS rule.
+  * For a quick overview of "meta viewport" and @viewport, see this article:
+  *   http://webdesign.tutsplus.com/tutorials/htmlcss-tutorials/quick-tip-dont-forget-the-viewport-meta-tag
+  * To see how it works, try your app on a real device with and without a "meta viewport" tag.
+  * Additional useful references include:
+  *   http://www.quirksmode.org/mobile/viewports.html
+  *   http://www.quirksmode.org/mobile/metaviewport/devices.html
+  *   https://developer.apple.com/library/safari/documentation/AppleApplications/Reference/SafariHTMLRef/Articles/MetaTags.html
+-->
+
+        <!-- <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1"> -->
+        <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=no">
+        <!-- <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes, minimum-scale=1, maximum-scale=2"> -->
+
+        <style>
+            /* following three (cascaded) are equivalent to above three meta viewport statements */
+            /* see http://www.quirksmode.org/blog/archives/2014/05/html5_dev_conf.html */
+            /* see http://dev.w3.org/csswg/css-device-adapt/ */
+                @-ms-viewport { width: 100vw ; min-zoom: 100% ; zoom: 100% ; }          @viewport { width: 100vw ; min-zoom: 100% zoom: 100% ; }
+                @-ms-viewport { user-zoom: fixed ; min-zoom: 100% ; }                   @viewport { user-zoom: fixed ; min-zoom: 100% ; }
+                /*@-ms-viewport { user-zoom: zoom ; min-zoom: 100% ; max-zoom: 200% ; }   @viewport { user-zoom: zoom ; min-zoom: 100% ; max-zoom: 200% ; }*/
+        </style>
+
+        <link rel="stylesheet" href="datatables/jquery.dataTables.min.css">
+        <link rel="stylesheet" href="datatables/responsive.dataTables.min.css">
+        <link rel="stylesheet" href="css/app.css">
+        <link rel="stylesheet" type="text/css" href="css/index_main.less.css" class="main-less">
+
+        <!-- IMPORTANT: Do not include a weinre script tag as part of your release builds! -->
+        <!-- Place your remote debugging (weinre) script URL here, if it does not work below. -->
+
+        <script src="bower_components/bootstrap-sweetalert/dist/sweetalert.min.js"></script>
+        <link rel="stylesheet" href="bower_components/bootstrap-sweetalert/dist/sweetalert.css">
+        <!-- Recommended location for your JavaScript libraries -->
+        <!-- These library references (below) are just examples to give you the general idea... -->
+        <!-- <script src="lib/mc/hammer.js"></script> -->
+        <!-- <script src="lib/ft/fastclick.js"></script> -->
+        <script type="text/javascript" charset="utf-8" src="js/html5sql.js"></script>
+        <script type="text/javascript" charset="utf-8" src="js/knockout-3.3.0.js"></script>
+        <script type="text/javascript" charset="utf-8" src="js/validate.js"></script>
+        <script type="text/javascript" charset="utf-8" src="js/promise.js"></script>
+        <script src="bower_components/handlebars/handlebars.min.js"></script>
+        <!--
+  * cordova.js is a phantom lib for "Cordova HTML5 web app," it does nothing in a "Standard HTML5 web app"
+  * Seeing a "Failed to load resource: net::ERR_FILE_NOT_FOUND" message caused by this "cordova.js" script?
+  * The cordova.js script is required if you convert your "Standard HTML5" project into a "Cordova" project.
+  * You can safely ignore the error or comment out this line if you will not be developing a Cordova app.
+-->
+        <script src="js/viewmodels/addNewSubPage.js"></script>
+        <script src="js/viewmodels/computeSubPage.js"></script>
+        <script src="cordova.js"></script>
+
+        <script src="js/app.js"></script>
+        <!-- for your event code, see README and file comments for details -->
+        <script src="js/init-app.js"></script>
+        <!-- for your init code, see README and file comments for details -->
+        <script src="xdk/init-dev.js"></script>
+        <!-- normalizes device and document ready events, see file for details -->
+        <script type="application/javascript" src="lib/jquery.min.js"></script>
+        <script type="application/javascript" src="marginal/marginal-position.min.js"></script>
+    </head>
+
+    <body>
+        <script id="checkdetails-template" type="text/x-handlebars-template">
+            {{#each check}}
+            <div class="grid grid-pad urow uib_row_10" data-uib="layout/row" data-ver="0">
+                <div class="col uib_col_13 col-1_2-12_2-6_2-2_2-2" data-uib="layout/col" data-ver="0">
+                    <div class="widget-container content-area vertical-col">
+                        <div class="table-thing widget uib_w_13 d-margins" data-uib="twitter%20bootstrap/input" data-ver="1">
+                            <label class="narrow-control label-top-left">Amount</label>
+                            <input id="amount{{id}}" class="wide-control form-control default" type="text">
+                        </div>
+                        <span class="uib_shim"></span>
+                    </div>
+                </div>
+                <div class="col uib_col_16 col-1_2-12_2-6_2-4_2-2" data-uib="layout/col" data-ver="0">
+                    <div class="widget-container content-area vertical-col">
+                        <div class="table-thing widget uib_w_14 d-margins" data-uib="twitter%20bootstrap/input" data-ver="1">
+                            <label class="narrow-control label-top-left">Account Name</label>
+                            <input id="accountName{{id}}" class="wide-control form-control default" type="text">
+                        </div>
+                        <span class="uib_shim"></span>
+                    </div>
+                </div>
+                <div class="col uib_col_19 col-1_2-12_2-6_2-4_2-2" data-uib="layout/col" data-ver="0">
+                    <div class="widget-container content-area vertical-col">
+                        <div class="table-thing widget uib_w_15 d-margins" data-uib="twitter%20bootstrap/input" data-ver="1">
+                            <label class="narrow-control label-top-left">Account No</label>
+                            <input id="accountNo{{id}}" class="wide-control form-control default" type="text">
+                        </div>
+                        <span class="uib_shim"></span>
+                    </div>
+                </div>
+                <div class="col uib_col_18 col-1_1-12_1-6_1-2_1-2" data-uib="layout/col" data-ver="0">
+                    <div class="widget-container content-area vertical-col">
+                        <div class="table-thing widget uib_w_16 d-margins" data-uib="twitter%20bootstrap/input" data-ver="1">
+                            <label class="narrow-control label-top-left">Bank</label>
+                            <input id="bank{{id}}" class="wide-control form-control default" type="text">
+                        </div>
+                        <span class="uib_shim"></span>
+                    </div>
+                </div>
+                <div class="col uib_col_17 col-1_1-12_1-6_1-2_1-2" data-uib="layout/col" data-ver="0">
+                    <div class="widget-container content-area vertical-col">
+                        <div class="table-thing widget uib_w_17 d-margins" data-uib="twitter%20bootstrap/input" data-ver="1">
+                            <label class="narrow-control label-top-left">Branch</label>
+                            <input id="branch{{id}}" class="wide-control form-control default" type="text">
+                        </div>
+                        <span class="uib_shim"></span>
+                    </div>
+                </div>
+
+                <div class="col uib_col_15 col-1_2-12_2-6_2-4_2-2" data-uib="layout/col" data-ver="0">
+                    <div class="widget-container content-area vertical-col">
+                        <div class="table-thing widget uib_w_18 d-margins" data-uib="twitter%20bootstrap/input" data-ver="1">
+                            <label class="narrow-control label-top-left">Check No</label>
+                            <input id="checkNo{{id}}" class="wide-control form-control default" type="text">
+                        </div>
+                        <span class="uib_shim"></span>
+                    </div>
+                </div>
+                <div class="col uib_col_20 col-1_2-12_2-6_2-4_2-2" data-uib="layout/col" data-ver="0">
+                    <div class="widget-container content-area vertical-col">
+                        <div class="table-thing widget uib_w_19 d-margins" data-uib="twitter%20bootstrap/input" data-ver="1">
+                            <label class="narrow-control label-top-left">Date</label>
+                            <input id="date{{id}}" class="wide-control form-control default" type="date">
+                        </div>
+                        <span class="uib_shim"></span>
+                    </div>
+                </div>
+
+                <span class="uib_shim"></span>
+            </div>
+            {{/each}}
+        </script>
+        <!-- IMPORTANT: Do not include a weinre script tag as part of your release builds! -->
+        <!-- Place your remote debugging weinre script URL here, if it does not work above. -->
+        <div class="upage" id="mainpage">
+            <div class="upage-outer content-area vertical-col left">
+                <div class="uib-header header-bg container-group inner-element uib_w_1" data-uib="layout/header" data-ver="0">
+                    <h2></h2>
+                    <div class="widget-container wrapping-col single-centered"></div>
+                    <div class="widget-container content-area horiz-area wrapping-col left"></div>
+                    <div class="widget-container content-area horiz-area wrapping-col right"></div>
+                </div>
+                <div id="loginSubPage" class="upage-content vertical-col left ">
+                    <div class="grid grid-pad urow uib_row_1 row-height-1" data-uib="layout/row" data-ver="0">
+                        <div class="col uib_col_1 col-0_12-12" data-uib="layout/col" data-ver="0">
+                            <div class="widget-container content-area vertical-col">
+                                <div class="grid grid-pad urow uib_row_2 row-height-2 login-pad" data-uib="layout/row" data-ver="0">
+                                    <div class="col uib_col_2 col-1_12-12" data-uib="layout/col" data-ver="0">
+                                        <div class="widget-container content-area vertical-col">
+                                            <div class="widget uib_w_2 d-margins" data-uib="media/img" data-ver="0">
+                                                <figure class="figure-align">
+                                                    <img src="images/Dodson_logo final.jpg">
+                                                    <figcaption data-position="bottom"></figcaption>
+                                                </figure>
+                                            </div>
+                                            <button class="btn widget uib_w_3 d-margins btn-lg btn-primary" data-uib="twitter%20bootstrap/button" data-ver="1">ENTER</button>
+                                            <span class="uib_shim"></span>
+                                        </div>
+                                    </div>
+                                    <span class="uib_shim"></span>
+                                </div>
+
+                                <span class="uib_shim"></span>
+                            </div>
+                        </div>
+                        <span class="uib_shim"></span>
+                    </div>
+                </div>
+                <div id="homeSubPage" class="upage-content vertical-col left hidden">
+                    <div class="grid grid-pad urow uib_row_3 row-height-3" data-uib="layout/row" data-ver="0">
+                        <div class="col uib_col_3 col-0_12-12" data-uib="layout/col" data-ver="0">
+                            <div class="widget-container content-area vertical-col">
+                                <div class="grid grid-pad urow uib_row_4 row-height-4 login-pad" data-uib="layout/row" data-ver="0">
+                                    <div class="col uib_col_4 col-1_12-12" data-uib="layout/col" data-ver="0">
+                                        <div class="widget-container content-area vertical-col">
+                                            <div class="btn-group uib-bs-flex widget uib_w_4 d-margins btn-group-vertical" data-uib="twitter%20bootstrap/button_group" data-ver="1">
+                                                <button class="btn widget uib_w_5 vertical-group btn-lg btn-primary" data-uib="twitter%20bootstrap/button" data-ver="1"><i class="glyphicon glyphicon-plus button-icon-left" data-position="left"></i>NEW CLIENT</button>
+                                                <button class="btn widget uib_w_6 vertical-group btn-lg btn-info" data-uib="twitter%20bootstrap/button" data-ver="1"><i class="glyphicon glyphicon-list-alt button-icon-left" data-position="left"></i>LIST</button>
+                                            </div>
+                                            <span class="uib_shim"></span>
+                                        </div>
+                                    </div>
+                                    <span class="uib_shim"></span>
+                                </div>
+
+                                <span class="uib_shim"></span>
+                            </div>
+                        </div>
+                        <span class="uib_shim"></span>
+                    </div>
+                </div>
+                <div id="addNewSubPage" class="upage-content vertical-col left hidden">
+                    <div class="grid grid-pad urow uib_row_5 row-height-5" data-uib="layout/row" data-ver="0">
+                        <div class="col uib_col_5 col-0_12-12" data-uib="layout/col" data-ver="0">
+                            <div class="widget-container content-area vertical-col">
+                                <div class="panel widget uib_w_7 d-margins panel-default" data-uib="twitter%20bootstrap/panel" data-ver="1">
+                                    <div class="panel-heading">
+                                        <div class="widget-container">
+                                            <div class="tarea widget uib_w_51 d-margins" data-uib="media/text" data-ver="0" name="uib_w_51">
+                                                <div class="widget-container left-receptacle"></div>
+                                                <div class="widget-container right-receptacle">
+                                                    <div class="btn-group uib-bs-flex widget uib_w_52 d-margins" data-uib="twitter%20bootstrap/button_group" data-ver="1">
+                                                        <button class="btn widget uib_w_53 btn-default" data-uib="twitter%20bootstrap/button" data-ver="1"><i class="glyphicon glyphicon-chevron-left button-icon-left" data-position="left"></i>Back</button>
+                                                        <button class="btn widget uib_w_54 btn-default" data-uib="twitter%20bootstrap/button" data-ver="1">Next<i class="glyphicon glyphicon-chevron-right button-icon-right" data-position="right"></i>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                                <div class="text-container">
+                                                    <h3>New</h3>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col uib_col_6 single-col" data-uib="layout/col" data-ver="0">
+                                        <div class="widget-container content-area vertical-col">
+                                            <div class="grid grid-pad urow uib_row_6 row-height-6" data-uib="layout/row" data-ver="0">
+                                                <div class="col uib_col_7 col-1_12-12" data-uib="layout/col" data-ver="0">
+                                                    <div class="widget-container content-area vertical-col">
+                                                        <div class="grid grid-pad urow uib_row_8" data-uib="layout/row" data-ver="0">
+                                                            <div class="col uib_col_9 col-2_6-12" data-uib="layout/col" data-ver="0">
+                                                                <div class="widget-container content-area vertical-col">
+                                                                    <div class="table-thing widget uib_w_8 d-margins" data-uib="twitter%20bootstrap/input" data-ver="1">
+                                                                        <label class="narrow-control label-top-left">Date</label>
+                                                                        <input class="wide-control form-control default" type="date" placeholder="Placeholder">
+                                                                    </div>
+                                                                    <span class="uib_shim"></span>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col uib_col_10 col-2_6-12" data-uib="layout/col" data-ver="0">
+                                                                <div class="widget-container content-area vertical-col">
+                                                                    <div class="table-thing widget uib_w_10 d-margins" data-uib="twitter%20bootstrap/select" data-ver="1">
+                                                                        <label class="narrow-control label-top-left">Type</label>
+                                                                        <select class="wide-control form-control default">
+                                                                            <option>Dated</option>
+                                                                            <option>Post-Dated</option>
+                                                                        </select>
+                                                                    </div>
+                                                                    <span class="uib_shim"></span>
+                                                                </div>
+                                                            </div>
+
+                                                            <span class="uib_shim"></span>
+                                                        </div>
+                                                        <div class="grid grid-pad urow uib_row_9" data-uib="layout/row" data-ver="0">
+                                                            <div class="col uib_col_11 col-2_6-12" data-uib="layout/col" data-ver="0">
+                                                                <div class="widget-container content-area vertical-col">
+                                                                    <div class="table-thing widget uib_w_9 d-margins" data-uib="twitter%20bootstrap/input" data-ver="1">
+                                                                        <label class="narrow-control label-top-left">Client</label>
+                                                                        <input class="wide-control form-control default" type="text">
+                                                                    </div>
+                                                                    <span class="uib_shim"></span>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col uib_col_12 col-2_6-12" data-uib="layout/col" data-ver="0">
+                                                                <div class="widget-container content-area vertical-col">
+                                                                    <div class="table-thing widget uib_w_11 d-margins" data-uib="twitter%20bootstrap/select" data-ver="1">
+                                                                        <label class="narrow-control label-top-left">Client Type</label>
+                                                                        <select class="wide-control form-control default">
+                                                                            <option>Normal</option>
+                                                                            <option>Special</option>
+                                                                        </select>
+                                                                    </div>
+                                                                    <span class="uib_shim"></span>
+                                                                </div>
+                                                            </div>
+
+                                                            <span class="uib_shim"></span>
+                                                        </div>
+
+                                                        <span class="uib_shim"></span>
+                                                    </div>
+                                                </div>
+                                                <span class="uib_shim"></span>
+                                            </div>
+                                            <div class="grid grid-pad urow uib_row_7" data-uib="layout/row" data-ver="0">
+                                                <div class="col uib_col_8 col-1_12-12" data-uib="layout/col" data-ver="0">
+                                                    <div class="widget-container content-area vertical-col">
+                                                        <button class="btn widget uib_w_12 d-margins btn-lg btn-primary" data-uib="twitter%20bootstrap/button" data-ver="1"><i class="glyphicon glyphicon-plus button-icon-left" data-position="left"></i>ADD CHECK</button>
+                                                        <span class="uib_shim"></span>
+                                                    </div>
+                                                </div>
+                                                <span class="uib_shim"></span>
+                                            </div>
+                                            <div class="checkdetails"></div>
+                                            <div class="grid grid-pad urow uib_row_10" data-uib="layout/row" data-ver="0">
+                                                <div class="col uib_col_13 col-1_2-12_2-6_2-2_2-2" data-uib="layout/col" data-ver="0">
+                                                    <div class="widget-container content-area vertical-col">
+                                                        <div class="table-thing widget uib_w_13 d-margins" data-uib="twitter%20bootstrap/input" data-ver="1">
+                                                            <label class="narrow-control label-top-left">Amount</label>
+                                                            <input class="wide-control form-control default" type="text">
+                                                        </div>
+                                                        <span class="uib_shim"></span>
+                                                    </div>
+                                                </div>
+                                                <div class="col uib_col_16 col-1_2-12_2-6_2-4_2-2" data-uib="layout/col" data-ver="0">
+                                                    <div class="widget-container content-area vertical-col">
+                                                        <div class="table-thing widget uib_w_14 d-margins" data-uib="twitter%20bootstrap/input" data-ver="1">
+                                                            <label class="narrow-control label-top-left">Account Name</label>
+                                                            <input class="wide-control form-control default" type="text">
+                                                        </div>
+                                                        <span class="uib_shim"></span>
+                                                    </div>
+                                                </div>
+                                                <div class="col uib_col_19 col-1_2-12_2-6_2-4_2-2" data-uib="layout/col" data-ver="0">
+                                                    <div class="widget-container content-area vertical-col">
+                                                        <div class="table-thing widget uib_w_15 d-margins" data-uib="twitter%20bootstrap/input" data-ver="1">
+                                                            <label class="narrow-control label-top-left">Account No</label>
+                                                            <input class="wide-control form-control default" type="text">
+                                                        </div>
+                                                        <span class="uib_shim"></span>
+                                                    </div>
+                                                </div>
+                                                <div class="col uib_col_18 col-1_1-12_1-6_1-2_1-2" data-uib="layout/col" data-ver="0">
+                                                    <div class="widget-container content-area vertical-col">
+                                                        <div class="table-thing widget uib_w_16 d-margins" data-uib="twitter%20bootstrap/input" data-ver="1">
+                                                            <label class="narrow-control label-top-left">Bank</label>
+                                                            <input class="wide-control form-control default" type="text">
+                                                        </div>
+                                                        <span class="uib_shim"></span>
+                                                    </div>
+                                                </div>
+                                                <div class="col uib_col_17 col-1_1-12_1-6_1-2_1-2" data-uib="layout/col" data-ver="0">
+                                                    <div class="widget-container content-area vertical-col">
+                                                        <div class="table-thing widget uib_w_17 d-margins" data-uib="twitter%20bootstrap/input" data-ver="1">
+                                                            <label class="narrow-control label-top-left">Branch</label>
+                                                            <input class="wide-control form-control default" type="text">
+                                                        </div>
+                                                        <span class="uib_shim"></span>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col uib_col_15 col-1_2-12_2-6_2-4_2-2" data-uib="layout/col" data-ver="0">
+                                                    <div class="widget-container content-area vertical-col">
+                                                        <div class="table-thing widget uib_w_18 d-margins" data-uib="twitter%20bootstrap/input" data-ver="1">
+                                                            <label class="narrow-control label-top-left">Check No</label>
+                                                            <input class="wide-control form-control default" type="text">
+                                                        </div>
+                                                        <span class="uib_shim"></span>
+                                                    </div>
+                                                </div>
+                                                <div class="col uib_col_20 col-1_2-12_2-6_2-4_2-2" data-uib="layout/col" data-ver="0">
+                                                    <div class="widget-container content-area vertical-col">
+                                                        <div class="table-thing widget uib_w_19 d-margins" data-uib="twitter%20bootstrap/input" data-ver="1">
+                                                            <label class="narrow-control label-top-left">Date</label>
+                                                            <input class="wide-control form-control default" type="date">
+                                                        </div>
+                                                        <span class="uib_shim"></span>
+                                                    </div>
+                                                </div>
+
+                                                <span class="uib_shim"></span>
+                                            </div>
+                                            <div class="hidden grid grid-pad urow uib_row_11" data-uib="layout/row" data-ver="0">
+                                                <div class="col uib_col_14 col-1_2-12_2-6_2-2_2-2" data-uib="layout/col" data-ver="0">
+                                                    <div class="widget-container content-area vertical-col">
+                                                        <div class="table-thing widget uib_w_20 d-margins" data-uib="twitter%20bootstrap/input" data-ver="1">
+                                                            <label class="narrow-control label-top-left">Amount</label>
+                                                            <input class="wide-control form-control default" type="text">
+                                                        </div>
+                                                        <span class="uib_shim"></span>
+                                                    </div>
+                                                </div>
+                                                <div class="col uib_col_26 col-1_2-12_2-6_2-4_2-2" data-uib="layout/col" data-ver="0">
+                                                    <div class="widget-container content-area vertical-col">
+                                                        <div class="table-thing widget uib_w_21 d-margins" data-uib="twitter%20bootstrap/input" data-ver="1">
+                                                            <label class="narrow-control label-top-left">Account Name</label>
+                                                            <input class="wide-control form-control default" type="text">
+                                                        </div>
+                                                        <span class="uib_shim"></span>
+                                                    </div>
+                                                </div>
+                                                <div class="col uib_col_25 col-1_2-12_2-6_2-4_2-2" data-uib="layout/col" data-ver="0">
+                                                    <div class="widget-container content-area vertical-col">
+                                                        <div class="table-thing widget uib_w_22 d-margins" data-uib="twitter%20bootstrap/input" data-ver="1">
+                                                            <label class="narrow-control label-top-left">Account No</label>
+                                                            <input class="wide-control form-control default" type="text">
+                                                        </div>
+                                                        <span class="uib_shim"></span>
+                                                    </div>
+                                                </div>
+                                                <div class="col uib_col_24 col-1_1-12_1-6_1-2_1-2" data-uib="layout/col" data-ver="0">
+                                                    <div class="widget-container content-area vertical-col">
+                                                        <div class="table-thing widget uib_w_23 d-margins" data-uib="twitter%20bootstrap/input" data-ver="1">
+                                                            <label class="narrow-control label-top-left">Bank</label>
+                                                            <input class="wide-control form-control default" type="text">
+                                                        </div>
+                                                        <span class="uib_shim"></span>
+                                                    </div>
+                                                </div>
+                                                <div class="col uib_col_23 col-1_1-12_1-6_1-2_1-2" data-uib="layout/col" data-ver="0">
+                                                    <div class="widget-container content-area vertical-col">
+                                                        <div class="table-thing widget uib_w_24 d-margins" data-uib="twitter%20bootstrap/input" data-ver="1">
+                                                            <label class="narrow-control label-top-left">Branch</label>
+                                                            <input class="wide-control form-control default" type="text">
+                                                        </div>
+                                                        <span class="uib_shim"></span>
+                                                    </div>
+                                                </div>
+                                                <div class="col uib_col_22 col-1_2-12_2-6_2-4_2-2" data-uib="layout/col" data-ver="0">
+                                                    <div class="widget-container content-area vertical-col">
+                                                        <div class="table-thing widget uib_w_25 d-margins" data-uib="twitter%20bootstrap/input" data-ver="1">
+                                                            <label class="narrow-control label-top-left">Check No</label>
+                                                            <input class="wide-control form-control default" type="text">
+                                                        </div>
+                                                        <span class="uib_shim"></span>
+                                                    </div>
+                                                </div>
+                                                <div class="col uib_col_21 col-1_1-12_1-6_1-4_1-2" data-uib="layout/col" data-ver="0">
+                                                    <div class="widget-container content-area vertical-col">
+                                                        <div class="table-thing widget uib_w_26 d-margins" data-uib="twitter%20bootstrap/input" data-ver="1">
+                                                            <label class="narrow-control label-top-left">Date</label>
+                                                            <input class="wide-control form-control default" type="date">
+                                                        </div>
+                                                        <span class="uib_shim"></span>
+                                                    </div>
+                                                </div>
+                                                <div class="col uib_col_27 col-1_1-12_1-6_1-4_1-2" data-uib="layout/col" data-ver="0">
+                                                    <div class="widget-container content-area vertical-col">
+                                                        <div class="table-thing widget uib_w_27 d-margins" data-uib="twitter%20bootstrap/input" data-ver="1">
+                                                            <label class="narrow-control label-top-left">Days</label>
+                                                            <input class="wide-control form-control default" type="text">
+                                                        </div>
+                                                        <span class="uib_shim"></span>
+                                                    </div>
+                                                </div>
+
+                                                <span class="uib_shim"></span>
+                                            </div>
+
+                                            <span class="uib_shim"></span>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <span class="uib_shim"></span>
+                            </div>
+                        </div>
+                        <span class="uib_shim"></span>
+                    </div>
+                    <div class="grid grid-pad urow uib_row_12 row-height-12" data-uib="layout/row" data-ver="0">
+                        <div class="col uib_col_28 col-0_12-12" data-uib="layout/col" data-ver="0">
+                            <div class="widget-container content-area vertical-col">
+                                <span class="uib_shim"></span>
+                            </div>
+                        </div>
+                        <span class="uib_shim"></span>
+                    </div>
+
+                </div>
+                <div id="computeSubPage" class="upage-content vertical-col left hidden">
+                    <div class="grid grid-pad urow uib_row_13 row-height-13" data-uib="layout/row" data-ver="0">
+                        <div class="col uib_col_29 col-0_12-12" data-uib="layout/col" data-ver="0">
+                            <div class="widget-container content-area vertical-col">
+                                <div class="panel widget uib_w_28 d-margins panel-default" data-uib="twitter%20bootstrap/panel" data-ver="1">
+                                    <div class="panel-heading">
+                                        <div class="widget-container">
+                                            <div class="tarea widget uib_w_29 d-margins" data-uib="media/text" data-ver="0" name="uib_w_29">
+                                                <div class="widget-container left-receptacle"></div>
+                                                <div class="widget-container right-receptacle">
+                                                    <div class="btn-group uib-bs-flex widget uib_w_32 d-margins" data-uib="twitter%20bootstrap/button_group" data-ver="1">
+                                                        <button class="btn widget uib_w_33 btn-default" data-uib="twitter%20bootstrap/button" data-ver="1"><i class="glyphicon glyphicon-chevron-left button-icon-left" data-position="left"></i>Back</button>
+                                                        <button class="btn widget btn-default uib_w_34" data-uib="twitter%20bootstrap/button" data-ver="1">Button</button>
+                                                        <button class="btn widget btn-default uib_w_35" data-uib="twitter%20bootstrap/button" data-ver="1">Button</button>
+                                                    </div>
+                                                </div>
+                                                <div class="text-container">
+                                                    <h3>Computation</h3>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col uib_col_30 single-col" data-uib="layout/col" data-ver="0">
+                                        <div class="widget-container content-area vertical-col">
+                                            <div class="grid grid-pad urow uib_row_14 row-height-14" data-uib="layout/row" data-ver="0">
+                                                <div class="col uib_col_31 col-1_12-12" data-uib="layout/col" data-ver="0">
+                                                    <div class="widget-container content-area vertical-col">
+                                                        <div class="table-thing widget uib_w_36 d-margins" data-uib="twitter%20bootstrap/select" data-ver="1">
+                                                            <label class="narrow-control label-top-left">SC Denom</label>
+                                                            <select class="wide-control form-control default">
+                                                                <option>Option1</option>
+                                                                <option>Option2</option>
+                                                                <option>Option3</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="table-thing widget uib_w_37 d-margins" data-uib="twitter%20bootstrap/select" data-ver="1">
+                                                            <label class="narrow-control label-top-left">Rate</label>
+                                                            <select class="wide-control form-control default">
+                                                                <option>Option1</option>
+                                                                <option>Option2</option>
+                                                                <option>Option3</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="table-thing widget uib_w_38 d-margins" data-uib="twitter%20bootstrap/input" data-ver="1">
+                                                            <label class="narrow-control label-top-left">Days</label>
+                                                            <input class="wide-control form-control default" type="text">
+                                                        </div>
+                                                        <div class="table-thing widget uib_w_39 d-margins" data-uib="twitter%20bootstrap/input" data-ver="1">
+                                                            <label class="narrow-control label-top-left">FL Number</label>
+                                                            <input class="wide-control form-control default" type="text">
+                                                        </div>
+                                                        <button class="btn widget uib_w_44 d-margins btn-lg btn-primary" data-uib="twitter%20bootstrap/button" data-ver="1">COMPUTE</button>
+                                                        <span class="uib_shim"></span>
+                                                    </div>
+                                                </div>
+                                                <span class="uib_shim"></span>
+                                            </div>
+
+                                            <span class="uib_shim"></span>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="panel widget uib_w_30 d-margins panel-default" data-uib="twitter%20bootstrap/panel" data-ver="1">
+                                    <div class="panel-heading">
+                                        <div class="widget-container">
+                                            <div class="tarea widget uib_w_31 d-margins" data-uib="media/text" data-ver="0" name="uib_w_31">
+                                                <div class="widget-container left-receptacle"></div>
+                                                <div class="widget-container right-receptacle"></div>
+                                                <div class="text-container">
+                                                    <h3>Summary</h3>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col uib_col_32 single-col" data-uib="layout/col" data-ver="0">
+                                        <div class="widget-container content-area vertical-col">
+                                            <div class="grid grid-pad urow uib_row_15 row-height-15" data-uib="layout/row" data-ver="0">
+                                                <div class="col uib_col_33 col-1_12-12" data-uib="layout/col" data-ver="0">
+                                                    <div class="widget-container content-area vertical-col">
+                                                        <div class="grid urow uib_row_16" data-uib="layout/row" data-ver="0">
+                                                            <div class="col uib_col_34 col-2_6-12" data-uib="layout/col" data-ver="0">
+                                                                <div class="widget-container content-area vertical-col">
+                                                                    <div class="tarea widget uib_w_40 d-margins" data-uib="media/text" data-ver="0" name="uib_w_40">
+                                                                        <div class="widget-container left-receptacle"></div>
+                                                                        <div class="widget-container right-receptacle"></div>
+                                                                        <div class="text-container">
+                                                                            <p><strong>PRINCIPAL:</strong>
+                                                                            </p>
+                                                                        </div>
+                                                                    </div>
+                                                                    <span class="uib_shim"></span>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col uib_col_35 col-2_6-12" data-uib="layout/col" data-ver="0">
+                                                                <div class="widget-container content-area vertical-col">
+                                                                    <span class="uib_shim"></span>
+                                                                </div>
+                                                            </div>
+
+                                                            <span class="uib_shim"></span>
+                                                        </div>
+                                                        <div class="grid urow uib_row_19" data-uib="layout/row" data-ver="0">
+                                                            <div class="col uib_col_40 col-2_6-12" data-uib="layout/col" data-ver="0">
+                                                                <div class="widget-container content-area vertical-col">
+                                                                    <div class="tarea widget uib_w_41 d-margins" data-uib="media/text" data-ver="0" name="uib_w_41">
+                                                                        <div class="widget-container left-receptacle"></div>
+                                                                        <div class="widget-container right-receptacle"></div>
+                                                                        <div class="text-container">
+                                                                            <p><strong>INTEREST:</strong>
+                                                                            </p>
+                                                                        </div>
+                                                                    </div>
+                                                                    <span class="uib_shim"></span>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col uib_col_41 col-2_6-12" data-uib="layout/col" data-ver="0">
+                                                                <div class="widget-container content-area vertical-col">
+                                                                    <span class="uib_shim"></span>
+                                                                </div>
+                                                            </div>
+
+                                                            <span class="uib_shim"></span>
+                                                        </div>
+
+                                                        <div class="grid urow uib_row_18" data-uib="layout/row" data-ver="0">
+                                                            <div class="col uib_col_38 col-2_6-12" data-uib="layout/col" data-ver="0">
+                                                                <div class="widget-container content-area vertical-col">
+                                                                    <div class="tarea widget uib_w_42 d-margins" data-uib="media/text" data-ver="0" name="uib_w_42">
+                                                                        <div class="widget-container left-receptacle"></div>
+                                                                        <div class="widget-container right-receptacle"></div>
+                                                                        <div class="text-container">
+                                                                            <p><strong>SERVICE CHARGE:</strong>
+                                                                            </p>
+                                                                        </div>
+                                                                    </div>
+                                                                    <span class="uib_shim"></span>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col uib_col_39 col-2_6-12" data-uib="layout/col" data-ver="0">
+                                                                <div class="widget-container content-area vertical-col">
+                                                                    <span class="uib_shim"></span>
+                                                                </div>
+                                                            </div>
+
+                                                            <span class="uib_shim"></span>
+                                                        </div>
+
+                                                        <div class="grid urow uib_row_17" data-uib="layout/row" data-ver="0">
+                                                            <div class="col uib_col_36 col-2_6-12" data-uib="layout/col" data-ver="0">
+                                                                <div class="widget-container content-area vertical-col">
+                                                                    <div class="tarea widget uib_w_43 d-margins" data-uib="media/text" data-ver="0" name="uib_w_43">
+                                                                        <div class="widget-container left-receptacle"></div>
+                                                                        <div class="widget-container right-receptacle"></div>
+                                                                        <div class="text-container">
+                                                                            <p><strong>NET PROCEEDS:</strong>
+                                                                            </p>
+                                                                        </div>
+                                                                    </div>
+                                                                    <span class="uib_shim"></span>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col uib_col_37 col-2_6-12" data-uib="layout/col" data-ver="0">
+                                                                <div class="widget-container content-area vertical-col">
+                                                                    <span class="uib_shim"></span>
+                                                                </div>
+                                                            </div>
+
+                                                            <span class="uib_shim"></span>
+                                                        </div>
+
+                                                        <span class="uib_shim"></span>
+                                                    </div>
+                                                </div>
+                                                <span class="uib_shim"></span>
+                                            </div>
+
+                                            <span class="uib_shim"></span>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <span class="uib_shim"></span>
+                            </div>
+                        </div>
+                        <span class="uib_shim"></span>
+                    </div>
+                </div>
+                <div id="listSubPage" class="upage-content vertical-col left hidden">
+                    <div class="grid grid-pad urow uib_row_20 row-height-20" data-uib="layout/row" data-ver="0">
+                        <div class="col uib_col_42 col-0_12-12" data-uib="layout/col" data-ver="0">
+                            <div class="widget-container content-area vertical-col">
+                                <div class="panel widget uib_w_45 d-margins panel-default" data-uib="twitter%20bootstrap/panel" data-ver="1">
+                                    <div class="panel-heading">
+                                        <div class="widget-container">
+                                            <div class="tarea widget uib_w_46 d-margins" data-uib="media/text" data-ver="0" name="uib_w_46">
+                                                <div class="widget-container left-receptacle"></div>
+                                                <div class="widget-container right-receptacle">
+                                                    <div class="btn-group uib-bs-flex widget uib_w_47 d-margins" data-uib="twitter%20bootstrap/button_group" data-ver="1">
+                                                        <button class="btn widget uib_w_48 btn-default" data-uib="twitter%20bootstrap/button" data-ver="1"><i class="glyphicon glyphicon-home button-icon-left" data-position="left"></i>Home</button>
+                                                        <button class="btn widget uib_w_49 btn-default" data-uib="twitter%20bootstrap/button" data-ver="1"><i class="glyphicon glyphicon-plus button-icon-left" data-position="left"></i>Add</button>
+                                                        <button class="btn widget btn-default uib_w_50" data-uib="twitter%20bootstrap/button" data-ver="1">Button</button>
+                                                    </div>
+                                                </div>
+                                                <div class="text-container">
+                                                    <h3>List</h3>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col uib_col_43 single-col" data-uib="layout/col" data-ver="0">
+                                        <div class="widget-container content-area vertical-col">
+                                            <div class="grid grid-pad urow uib_row_21 row-height-21" data-uib="layout/row" data-ver="0">
+                                                <div class="col uib_col_44 col-1_12-12" data-uib="layout/col" data-ver="0">
+                                                    <div class="widget-container content-area vertical-col">
+                                                        <span class="uib_shim"></span>
+                                                    </div>
+                                                </div>
+                                                <span class="uib_shim"></span>
+                                            </div>
+
+                                            <span class="uib_shim"></span>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <span class="uib_shim"></span>
+                            </div>
+                        </div>
+                        <span class="uib_shim"></span>
+                    </div>
+                </div>
+                <div id="viewSubPage" class="upage-content vertical-col left hidden">
+                    <div class="grid grid-pad urow uib_row_22 row-height-22" data-uib="layout/row" data-ver="0">
+                        <div class="col uib_col_45 col-0_12-12" data-uib="layout/col" data-ver="0">
+                            <div class="widget-container content-area vertical-col">
+                                <div class="panel widget uib_w_55 d-margins panel-default" data-uib="twitter%20bootstrap/panel" data-ver="1">
+                                    <div class="panel-heading">
+                                        <div class="widget-container">
+                                            <div class="tarea widget uib_w_56 d-margins" data-uib="media/text" data-ver="0" name="uib_w_56">
+                                                <div class="widget-container left-receptacle"></div>
+                                                <div class="widget-container right-receptacle">
+                                                    <div class="btn-group uib-bs-flex widget uib_w_57 d-margins" data-uib="twitter%20bootstrap/button_group" data-ver="1">
+                                                        <button class="btn widget uib_w_58 btn-default" data-uib="twitter%20bootstrap/button" data-ver="1"><i class="glyphicon glyphicon-chevron-left button-icon-left" data-position="left"></i>Back</button>
+                                                        <button class="btn widget btn-default uib_w_59" data-uib="twitter%20bootstrap/button" data-ver="1">Button</button>
+                                                        <button class="btn widget uib_w_60 btn-default" data-uib="twitter%20bootstrap/button" data-ver="1"><i class="glyphicon glyphicon-trash button-icon-left" data-position="left"></i>Delete</button>
+                                                    </div>
+                                                </div>
+                                                <div class="text-container">
+                                                    <h3>View</h3>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col uib_col_46 single-col" data-uib="layout/col" data-ver="0">
+                                        <div class="widget-container content-area vertical-col">
+                                            <div class="grid grid-pad urow uib_row_23 row-height-23" data-uib="layout/row" data-ver="0">
+                                                <div class="col uib_col_47 col-1_12-12" data-uib="layout/col" data-ver="0">
+                                                    <div class="widget-container content-area vertical-col">
+                                                        <span class="uib_shim"></span>
+                                                    </div>
+                                                </div>
+                                                <span class="uib_shim"></span>
+                                            </div>
+
+                                            <span class="uib_shim"></span>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <span class="uib_shim"></span>
+                            </div>
+                        </div>
+                        <span class="uib_shim"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+
+</html>
