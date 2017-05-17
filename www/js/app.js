@@ -75,9 +75,7 @@ var notification = {
 function showLoader() {
     if (loader == false) {
         loader = true;
-        waitingDialog.show('Processing..', {
-            dialogSize: 'sm'
-        });
+        waitingDialog.show('Processing..');
     }
     //    $('body').addClass('ui-disabled');
 }
@@ -200,4 +198,54 @@ function loadMessages(lang) {
     if (lang.toUpperCase() == "EN") {
         messages = JSON.parse("/js/enMessages.json")
     }
+}
+
+function initDB() {
+    console.log("initDB");
+    html5sql.openDatabase("dodsonTPS", "Dodson TPS", 3 * 1024 * 1024);
+//            resetDB();
+    html5sql.process(
+        createSQLTablesIfNotExist(),
+        function (tx, results) {
+            console.log("html5sql prepared");
+        },
+        function (error, statement) {
+            console.error("Error: " + error.message + " when processing " + statement);
+        });
+}
+
+
+function createSQLTablesIfNotExist() {
+    var sql = new Array();
+    sql.push(createHeader());
+    sql.push(createDetails());
+    return sql;
+};
+
+function createHeader() {
+    var sql = '';
+    sql = sql + "CREATE table IF NOT EXISTS transactions (" +
+        "id INTEGER PRIMARY KEY" +
+        ", date DATE" +
+        ", client VARCHAR(200)" +
+        ", type VARCHAR(100)" +
+        ", flNumber DATE" +
+        ");";
+    return sql;
+}
+function createDetails() {
+    var sql = '';
+    sql = sql + "CREATE table IF NOT EXISTS transactiondetails (" +
+        "id INTEGER PRIMARY KEY" +
+        ", transactionID INT(11)" +
+        ", amount DOUBLE(11,11)" +
+        ", accountName VARCHAR(100)" +
+        ", accountNumber VARCHAR(100)" +
+        ", bank VARCHAR(75)" +
+        ", branch VARCHAR(75)" +
+        ", checkNo VARCHAR(75)" +
+        ", date DATE" +
+        ", days INT(10)" +
+        ");";
+    return sql;
 }

@@ -45,6 +45,9 @@ app.initEvents = function () {
     app.consoleLog(fName, "entry");
     ko.applyBindings(addNewSubPage, document.getElementById("addNewSubPage"));
     ko.applyBindings(computeSubPage, document.getElementById("computeSubPage"));
+    initDB();
+//    hideLoader();
+
     // NOTE: initialize your third-party libraries and event handlers
 
     // initThirdPartyLibraryNumberOne() ;

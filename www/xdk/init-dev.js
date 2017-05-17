@@ -76,7 +76,7 @@ dev.consoleLog = function() {       // only emits console.log messages if dev.LO
 
 dev.INSURANCE = 250 ;                   // ms, insurance on registering ready events detected
 dev.WINDOW_LOAD = 500 ;                 // ms, for combating premature window load events
-dev.BROWSER = 7000 ;                    // ms, detecting in a browser (probably best at >5 seconds)
+dev.BROWSER = 1000 ;                    // ms, detecting in a browser (probably best at >5 seconds)
 dev.FAIL_SAFE = 10000 ;                 // ms, if all else fails, this saves our bacon :-)
 
 
