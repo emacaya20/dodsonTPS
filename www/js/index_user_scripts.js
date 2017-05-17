@@ -14,6 +14,7 @@
     {
          /*global activate_subpage */
 
+//         activate_page("#print");
          activate_subpage("#homeSubPage");
          return false;
     });
@@ -30,7 +31,7 @@
     $(document).on("click", "#listButton", function(evt)
     {
          /*global activate_subpage */
-         activate_subpage("#listSubPage");
+        transactionsListSubPage.load();
          return false;
     });
 
