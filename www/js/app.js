@@ -203,7 +203,7 @@ function loadMessages(lang) {
 function initDB() {
     console.log("initDB");
     html5sql.openDatabase("dodsonTPS", "Dodson TPS", 3 * 1024 * 1024);
-//            resetDB();
+    //            resetDB();
     html5sql.process(
         createSQLTablesIfNotExist(),
         function (tx, results) {
@@ -229,10 +229,15 @@ function createHeader() {
         ", date DATE" +
         ", client VARCHAR(200)" +
         ", type VARCHAR(100)" +
-        ", flNumber DATE" +
+        ", flNumber VARCHAR(100)" +
+        ", principal DOUBLE(11,11)" +
+        ", interest DOUBLE(11,11)" +
+        ", serviceCharge INT(20)" +
+        ", netProceeds DOUBLE(11,11)" +
         ");";
     return sql;
 }
+
 function createDetails() {
     var sql = '';
     sql = sql + "CREATE table IF NOT EXISTS transactiondetails (" +
@@ -248,4 +253,40 @@ function createDetails() {
         ", days INT(10)" +
         ");";
     return sql;
+}
+
+function resetDB() {
+    html5sql.openDatabase("dodsonTPS", "Dodson TPS", 3 * 1024 * 1024);
+
+    console.log("html5sql resetdb");
+    html5sql.process(dropTables(),
+        function (tx, results) {
+            console.log("html5sql reset");
+        },
+        function (error, statement) {
+            console.error("Error: " + error.message + " when processing " + statement);
+        });
+}
+
+function dropTables() {
+    var sql = new Array();
+    sql.push(dropTransactions());
+    sql.push(dropTransactionDetails());
+    return sql;
+}
+
+function dropTransactions() {
+    var sql = "";
+    sql = sql + "DROP TABLE IF EXISTS transactions; ";
+    return sql;
+}
+
+function dropTransactionDetails() {
+    var sql = "";
+    sql = sql + "DROP TABLE IF EXISTS transactiondetails; ";
+    return sql;
+}
+
+function formatNumber(x){
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
 }

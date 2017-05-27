@@ -33,6 +33,8 @@ app.consoleLog = function () { // only emits console.log messages if app.LOG != 
 var addNewSubPage = new AddNewSubPage();
 var computeSubPage = new ComputeSubPage();
 var transactionsListSubPage = new TransactionsListSubPage();
+var viewSubPage = new ViewSubPage();
+var printPage = new PrintPage();
 
 // App init point (runs on custom app.Ready event from init-dev.js).
 // Runs after underlying device native code and webview/browser is ready.
@@ -47,6 +49,9 @@ app.initEvents = function () {
     ko.applyBindings(addNewSubPage, document.getElementById("addNewSubPage"));
     ko.applyBindings(computeSubPage, document.getElementById("computeSubPage"));
     ko.applyBindings(transactionsListSubPage, document.getElementById("transactionsListSubPage"));
+    ko.applyBindings(viewSubPage, document.getElementById("viewSubPage"));
+    ko.applyBindings(printPage, document.getElementById("printPage"));
+//    resetDB();
     initDB();
 //    hideLoader();
 

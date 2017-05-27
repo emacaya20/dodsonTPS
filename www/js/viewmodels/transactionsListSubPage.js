@@ -17,7 +17,7 @@ function TransactionsListSubPage() {
 
     self.getData = function () {
         html5sql.process(
-            getMyTeamSQL(),
+            "SELECT * FROM transactions  order by date desc;",
             function (tx, results) {
                 console.log(results.rows);
                 self.generateTable(results.rows);
@@ -67,8 +67,8 @@ function TransactionsListSubPage() {
             columns: [
                 {
                     "data": 'date',
-                    "render": function (orderDate, type, full, meta) {
-                        return formatDate(orderDate);
+                    "render": function (date, type, full, meta) {
+                        return formatDate(date);
                     }
                     },
                 {
@@ -89,8 +89,18 @@ function TransactionsListSubPage() {
                 $(this).addClass('selected');
             }
             var rowdata = transactionsListTable.row(this).data();
-//            managementOrdersViewPage.load(rowdata);
+            viewSubPage.load(rowdata);
             selectedRow = this;
         });
+    }
+
+    self.home=function(){
+        activate_subpage("#homeSubPage");
+    }
+    self.add=function(){
+        addNewSubPage.load();
+    }
+    self.search=function(){
+
     }
 }

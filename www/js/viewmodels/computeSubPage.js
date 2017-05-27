@@ -42,12 +42,12 @@ function ComputeSubPage() {
         }
         console.log(self.rate())
         if (same == true) {
-            interest = (((principal * self.rate()) * headerDetails[0].days) / 30) + 10;
+            interest = Math.round((((principal * self.rate()) * headerDetails[0].days) / 30) + 10);
         } else {
             for (var index = 0; index < headerDetails.length; index++) {
                 interest = interest + (((principal * self.rate()) * headerDetails[index].days) / 30);
             }
-            interest = interest + 10;
+            interest = Math.round(interest + 10);
         }
 
         if (principal == 1000 && principal <= 10000) {
@@ -118,13 +118,13 @@ function ComputeSubPage() {
             sc = 10020;
         }
 
-        serviceCharge = sc * self.scDenom();
+        serviceCharge = Math.round(sc * self.scDenom());
 
-        netProceeds = principal - serviceCharge - interest;
-        self.principal(principal);
-        self.sc(serviceCharge);
-        self.interest(interest);
-        self.netProceeds(netProceeds);
+        netProceeds = Math.round(principal - serviceCharge - Math.round(interest));
+        self.principal(formatNumber(principal));
+        self.sc(formatNumber(serviceCharge));
+        self.interest(formatNumber(interest));
+        self.netProceeds(formatNumber(netProceeds));
 
     }
 
@@ -151,10 +151,14 @@ function ComputeSubPage() {
 
     function insertTransactionHeader() {
         var sql = new Array();
-        transactions = "INSERT INTO transactions (date, client, type, flnumber) VALUES (" +
+        transactions = "INSERT INTO transactions (date, client, type, principal, interest, serviceCharge, netProceeds, flnumber) VALUES (" +
             "'" + headerData.date + "'," +
             "'" + headerData.client + "'," +
             "'" + headerData.type + "'," +
+            "'" + self.principal() + "'," +
+            "'" + self.interest() + "'," +
+            "'" + self.sc() + "'," +
+            "'" + self.netProceeds() + "'," +
             "'" + headerData.flNumber + "'"+
             ");";
         sql.push(transactions);
@@ -185,7 +189,7 @@ function ComputeSubPage() {
     }
 
     function print(){
-
+        printPage.load(headerData, headerDetails);
     }
 
     self.back = function () {
