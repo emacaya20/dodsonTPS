@@ -150,15 +150,19 @@ function ComputeSubPage() {
     }
 
     function insertTransactionHeader() {
+        headerData.principal = principal;
+        headerData.interest = interest;
+        headerData.serviceCharge = serviceCharge;
+        headerData.netProceeds = netProceeds;
         var sql = new Array();
-        transactions = "INSERT INTO transactions (date, client, type, principal, interest, serviceCharge, netProceeds, flnumber) VALUES (" +
+        transactions = "INSERT INTO transactions (date, client, type, principal, interest, serviceCharge, netProceeds, flNumber) VALUES (" +
             "'" + headerData.date + "'," +
             "'" + headerData.client + "'," +
             "'" + headerData.type + "'," +
-            "'" + self.principal() + "'," +
-            "'" + self.interest() + "'," +
-            "'" + self.sc() + "'," +
-            "'" + self.netProceeds() + "'," +
+            "'" + principal + "'," +
+            "'" + interest + "'," +
+            "'" + serviceCharge + "'," +
+            "'" + netProceeds + "'," +
             "'" + headerData.flNumber + "'"+
             ");";
         sql.push(transactions);
@@ -167,8 +171,8 @@ function ComputeSubPage() {
     }
 
     function insertTransactionHeaderDetails(id) {
+        var sql = new Array();
         for (var index = 0; index < headerDetails.length; index++) {
-            var sql = new Array();
 
 
             transactiondetails = "INSERT INTO transactiondetails (transactionID, amount, accountName, accountNumber, bank, branch, checkNo, date, days) VALUES (" +

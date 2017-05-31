@@ -13,11 +13,30 @@ function AddNewSubPage() {
         details = [];
         activate_subpage("#addNewSubPage");
         self.date(formatDate(new Date()));
+        self.addCheck();
+        self.client('');
 
     }
 
     self.addCheck = function () {
-
+        for (var i = 0; i < details.length; i++) {
+            var amount = "amount" + details[i].id;
+            var accountName = "accountName" + details[i].id;
+            var accountNumber = "accountNumber" + details[i].id;
+            var bank = "bank" + details[i].id;
+            var branch = "branch" + details[i].id;
+            var checkNo = "checkNo" + details[i].id;
+            var date = "date" + details[i].id;
+            var days = "days" + details[i].id;
+            details[i].amount = Number(document.getElementById(amount).value);
+            details[i].accountName = document.getElementById(accountName).value;
+            details[i].accountNumber = document.getElementById(accountNumber).value;
+            details[i].bank = document.getElementById(bank).value;
+            details[i].branch = document.getElementById(branch).value;
+            details[i].checkNo = document.getElementById(checkNo).value;
+            details[i].date = document.getElementById(date).value;
+            details[i].days = document.getElementById(days).value;
+        }
         details.push({
             "id": index,
             "amount": '',
@@ -31,7 +50,7 @@ function AddNewSubPage() {
         });
         index++;
         var theTemplateScript = $("#checkdetails-template").html();
-
+//console.log(theTemplateScript)
         var theTemplate = Handlebars.compile(theTemplateScript);
 
         // Pass our data to the template
@@ -41,38 +60,43 @@ function AddNewSubPage() {
 
         //console.log("theCompiledHtml:");
         var theCompiledHtml = theTemplate(wrapper);
-
+console.log(theCompiledHtml)
         $('.checkdetails').html(theCompiledHtml);
+
 
 
     }
 
     self.next = function () {
 
-        for (var index = 0; index < details.length; index++) {
-            var amount = "amount" + details[index].id;
-            var accountName = "accountName" + details[index].id;
-            var accountNumber = "accountNumber" + details[index].id;
-            var bank = "bank" + details[index].id;
-            var branch = "branch" + details[index].id;
-            var checkNo = "checkNo" + details[index].id;
-            var date = "date" + details[index].id;
-            var days = "days" + details[index].id;
-            details[index].amount = Number(document.getElementById(amount).value);
-            details[index].accountName = document.getElementById(accountName).value;;
-            details[index].accountNumber = document.getElementById(accountNumber).value;;
-            details[index].bank = document.getElementById(bank).value;;
-            details[index].branch = document.getElementById(branch).value;;
-            details[index].checkNo = document.getElementById(checkNo).value;;
-            details[index].date = document.getElementById(date).value;;
-            details[index].days = document.getElementById(days).value;;
+        for (var i = 0; i < details.length; i++) {
+            var amount = "amount" + details[i].id;
+            var accountName = "accountName" + details[i].id;
+            var accountNumber = "accountNumber" + details[i].id;
+            var bank = "bank" + details[i].id;
+            var branch = "branch" + details[i].id;
+            var checkNo = "checkNo" + details[i].id;
+            var date = "date" + details[i].id;
+            var days = "days" + details[i].id;
+            details[i].amount = Number(document.getElementById(amount).value);
+            details[i].accountName = document.getElementById(accountName).value;;
+            details[i].accountNumber = document.getElementById(accountNumber).value;;
+            details[i].bank = document.getElementById(bank).value;;
+            details[i].branch = document.getElementById(branch).value;;
+            details[i].checkNo = document.getElementById(checkNo).value;;
+            details[i].date = document.getElementById(date).value;;
+            details[i].days = document.getElementById(days).value;;
         }
         console.log(details);
         var header = {
             "date":self.date(),
             "client":self.client(),
             "type":self.clientType(),
-            "flNumber":''
+            "flNumber":'',
+            "principal":'',
+            "interest":'',
+            "serviceCharge":'',
+            "netProceeds":''
         }
         computeSubPage.load(header, details);
     }

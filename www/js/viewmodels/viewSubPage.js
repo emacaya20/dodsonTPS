@@ -11,10 +11,12 @@ function ViewSubPage() {
     self.netProceeds = ko.observable('');
     self.flNumber = ko.observable('');
     var transactionData = [];
+    var transactionDetails = [];
     self.load = function (data) {
         transactionData = data;
+        transactionDetails = [];
 
-        self.flNumber(data.flNumber);
+        self.flNumber(data.flnumber);
         self.date(data.date);
         self.client(data.client);
         self.type(data.type);
@@ -32,17 +34,19 @@ function ViewSubPage() {
     }
 
     self.deleteTransaction = function () {
-        activate_subpage("#transactionsListSubPage");
-        html5sql.process(
-            "DELETE FROM transactiondetails WHERE transactiondetails.transactionID = '" + transactionData.id + "' ; DELETE FROM transactions WHERE transactions.id = '" + transactionData.id + "' ;",
-            function (tx, results) {
-                notification.alert("Transaction deleted!", 'success', "Sucess", "OK");
-                transactionsListSubPage.load();
-            },
-            function (error, statement) {
-                console.error("Error: " + error.message + " when processing " + statement);
-            }
-        );
+
+        printPage.load(transactionData, transactionDetails);
+        //        activate_subpage("#transactionsListSubPage");
+        //        html5sql.process(
+        //            "DELETE FROM transactiondetails WHERE transactiondetails.transactionID = '" + transactionData.id + "' ; DELETE FROM transactions WHERE transactions.id = '" + transactionData.id + "' ;",
+        //            function (tx, results) {
+        //                notification.alert("Transaction deleted!", 'success', "Sucess", "OK");
+        //                transactionsListSubPage.load();
+        //            },
+        //            function (error, statement) {
+        //                console.error("Error: " + error.message + " when processing " + statement);
+        //            }
+        //        );
     }
     self.update = function () {
         activate_subpage("#transactionsListSubPage");
@@ -53,6 +57,7 @@ function ViewSubPage() {
             "SELECT * FROM transactiondetails WHERE transactiondetails.transactionID = '" + id + "' order by id asc;",
             function (tx, results) {
                 console.log(results.rows);
+                transactionDetails = results.rows;
                 self.generateTable(results.rows);
                 for (var i = 0; i < results.rows.length; i++) {
 

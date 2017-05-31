@@ -42,3 +42,6 @@ body {
     background: white ;
     color: black ;
 }
+.print-width.upage-content > .grid{
+    margin-left: 0;
+}
