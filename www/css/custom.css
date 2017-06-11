@@ -1,9 +1,12 @@
 #print1.upage-content > .grid{
-    margin-left: 0px;
+    margin-left: 10px;
+    margin-top: 10px;
 }
 #print2.upage-content > .grid{
-    margin-left: 0px;
+    margin-left: 10px;
+    margin-top: 10px;
 }
 #receipt.upage-content > .grid{
-    margin-left: 0px;
+    margin-left: 10px;
+    margin-top: 10px;
 }

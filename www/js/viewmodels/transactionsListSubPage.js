@@ -3,6 +3,10 @@ function TransactionsListSubPage() {
     var transactionsListTable;
     var selectedRow;
 
+    self.dateFrom = ko.observable('');
+    self.dateTo = ko.observable('');
+    self.client = ko.observable('');
+
     self.load = function () {
         self.getData();
         activate_subpage("#transactionsListSubPage");
@@ -10,14 +14,14 @@ function TransactionsListSubPage() {
 
     function getMyTeamSQL() {
         var sql = '';
-        sql = "SELECT * FROM transactions  order by date desc;"
+        sql = "SELECT * FROM transactions  order by date desc, id;"
 //        sql = "SELECT * FROM myTeam WHERE myTeam.processingDate = '" + localStorage.processingDate + "' order by status desc, employeeCode;"
         return sql;
     }
 
     self.getData = function () {
         html5sql.process(
-            "SELECT * FROM transactions  order by date desc;",
+            "SELECT * FROM transactions  order by date desc, id ;",
             function (tx, results) {
                 console.log(results.rows);
                 self.generateTable(results.rows);

@@ -193,7 +193,7 @@ function ComputeSubPage() {
     }
 
     function print(){
-        printPage.load(headerData, headerDetails);
+        printPage.load(headerData, headerDetails,"#computeSubPage" );
     }
 
     self.back = function () {

@@ -16,7 +16,7 @@ function ViewSubPage() {
         transactionData = data;
         transactionDetails = [];
 
-        self.flNumber(data.flnumber);
+        self.flNumber(data.flNumber);
         self.date(data.date);
         self.client(data.client);
         self.type(data.type);
@@ -35,21 +35,34 @@ function ViewSubPage() {
 
     self.deleteTransaction = function () {
 
-        printPage.load(transactionData, transactionDetails);
-        //        activate_subpage("#transactionsListSubPage");
-        //        html5sql.process(
-        //            "DELETE FROM transactiondetails WHERE transactiondetails.transactionID = '" + transactionData.id + "' ; DELETE FROM transactions WHERE transactions.id = '" + transactionData.id + "' ;",
-        //            function (tx, results) {
-        //                notification.alert("Transaction deleted!", 'success', "Sucess", "OK");
-        //                transactionsListSubPage.load();
-        //            },
-        //            function (error, statement) {
-        //                console.error("Error: " + error.message + " when processing " + statement);
-        //            }
-        //        );
+        html5sql.process(
+            "DELETE FROM transactiondetails WHERE transactiondetails.transactionID = '" + transactionData.id + "' ; DELETE FROM transactions WHERE transactions.id = '" + transactionData.id + "' ;",
+            function (tx, results) {
+                notification.alert("Transaction deleted!", 'success', "Sucess", "OK");
+                transactionsListSubPage.load();
+            },
+            function (error, statement) {
+                console.error("Error: " + error.message + " when processing " + statement);
+            }
+        );
+    }
+    self.printTransaction = function () {
+
+        printPage.load(transactionData, transactionDetails, "#viewSubPage");
+
     }
     self.update = function () {
-        activate_subpage("#transactionsListSubPage");
+        html5sql.process(
+            "UPDATE transactions set flNumber = '" + self.flNumber() + "' WHERE transactions.id = '" + transactionData.id + "';",
+            function (tx, results) {
+                console.log(results.rows);
+                notification.alert("FL Number Updated!", 'success', "Sucess", "OK");
+                transactionsListSubPage.load();
+            },
+            function (error, statement) {
+                console.error("Error: " + error.message + " when processing " + statement);
+            }
+        );
     }
 
     self.getData = function (id) {

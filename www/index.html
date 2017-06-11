@@ -282,11 +282,20 @@
                                 </p>
                             </div>
                         </div>
+
+                        <div class="tarea widget uib_w_132 d-margins center-txt" data-uib="media/text" data-ver="0" name="uib_w_132">
+                            <div class="widget-container left-receptacle"></div>
+                            <div class="widget-container right-receptacle"></div>
+                            <div class="text-container">
+                                <p><strong>{{days}} / {{interest}}</strong>
+                                </p>
+                            </div>
+                        </div>
                         <div class="tarea widget uib_w_92 d-margins center-txt" data-uib="media/text" data-ver="0" name="uib_w_92">
                             <div class="widget-container left-receptacle"></div>
                             <div class="widget-container right-receptacle"></div>
                             <div class="text-container">
-                                <p><strong>{{amount}}</strong>
+                                <p><strong>P {{amount}}</strong>
                                 </p>
                             </div>
                         </div>
@@ -342,11 +351,19 @@
                                 </p>
                             </div>
                         </div>
+                        <div class="tarea widget uib_w_132 d-margins center-txt" data-uib="media/text" data-ver="0" name="uib_w_132">
+                            <div class="widget-container left-receptacle"></div>
+                            <div class="widget-container right-receptacle"></div>
+                            <div class="text-container">
+                                <p><strong>{{days}} / {{interest}}</strong>
+                                </p>
+                            </div>
+                        </div>
                         <div class="tarea widget uib_w_92 d-margins center-txt" data-uib="media/text" data-ver="0" name="uib_w_92">
                             <div class="widget-container left-receptacle"></div>
                             <div class="widget-container right-receptacle"></div>
                             <div class="text-container">
-                                <p><strong>{{amount}}</strong>
+                                <p><strong>P {{amount}}</strong>
                                 </p>
                             </div>
                         </div>
@@ -698,8 +715,7 @@
                                                         <button data-bind="click:back" class="btn widget uib_w_33 btn-default" data-uib="twitter%20bootstrap/button" data-ver="1"><i class="glyphicon glyphicon-chevron-left button-icon-left" data-position="left"></i>Back</button>
                                                         <button data-bind="click:save" class="btn widget uib_w_34 btn-default" data-uib="twitter%20bootstrap/button" data-ver="1">Save<i class="glyphicon glyphicon-ok button-icon-right" data-position="right"></i>
                                                         </button>
-                                                        <button data-bind="click:print" class="btn widget uib_w_35 btn-default" data-uib="twitter%20bootstrap/button" data-ver="1">Print<i class="glyphicon glyphicon-print button-icon-right" data-position="right"></i>
-                                                        </button>
+
                                                     </div>
                                                 </div>
                                                 <div class="text-container">
@@ -898,7 +914,7 @@
                                                                         <div class="widget-container left-receptacle"></div>
                                                                         <div class="widget-container right-receptacle"></div>
                                                                         <div class="text-container">
-                                                                            <p data-bind="text:netProceeds">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                                                                            <p><strong data-bind="text:netProceeds">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</strong></p>
                                                                         </div>
                                                                     </div>
                                                                     <span class="uib_shim"></span>
@@ -1029,6 +1045,8 @@
                                                         <button data-bind="click:back" class="btn widget uib_w_58 btn-default" data-uib="twitter%20bootstrap/button" data-ver="1"><i class="glyphicon glyphicon-chevron-left button-icon-left" data-position="left"></i>Back</button>
 
                                                         <button data-bind="click:deleteTransaction" class="btn widget uib_w_60 btn-default" data-uib="twitter%20bootstrap/button" data-ver="1">Delete<i class="glyphicon glyphicon-trash button-icon-right" data-position="right"></i>
+                                                        </button>
+                                                        <button data-bind="click:printTransaction" class="btn widget uib_w_138 d-margins btn-default" data-uib="twitter%20bootstrap/button" data-ver="1">Print<i class="glyphicon glyphicon-print button-icon-right" data-position="right"></i>
                                                         </button>
                                                     </div>
                                                 </div>
@@ -1230,27 +1248,27 @@
                                                         <div class="grid urow uib_row_32" data-uib="layout/row" data-ver="0">
                                                             <div class="col uib_col_62 col-2_2-12" data-uib="layout/col" data-ver="0">
                                                                 <div class="widget-container content-area vertical-col">
-                                                                    <div class="tarea widget uib_w_68 d-margins" data-uib="media/text" data-ver="0" name="uib_w_68">
+
+                                                                    <div class="tarea widget uib_w_69 d-margins" data-uib="media/text" data-ver="0" name="uib_w_69">
                                                                         <div class="widget-container left-receptacle"></div>
                                                                         <div class="widget-container right-receptacle"></div>
                                                                         <div class="text-container">
-                                                                            <p><strong>INTEREST:</strong>
+                                                                            <p><strong>SERVICE CHARGE:</strong>
                                                                             </p>
                                                                         </div>
-                                                                    </div>
-                                                                    <span class="uib_shim"></span>
+                                                                    </div><span class="uib_shim"></span>
                                                                 </div>
                                                             </div>
                                                             <div class="col uib_col_63 col-2_10-12" data-uib="layout/col" data-ver="0">
                                                                 <div class="widget-container content-area vertical-col">
-                                                                    <div class="tarea widget uib_w_105 d-margins" data-uib="media/text" data-ver="0" name="uib_w_105">
+
+                                                                    <div class="tarea widget uib_w_106 d-margins" data-uib="media/text" data-ver="0" name="uib_w_106">
                                                                         <div class="widget-container left-receptacle"></div>
                                                                         <div class="widget-container right-receptacle"></div>
                                                                         <div class="text-container">
-                                                                            <p data-bind="text:interest">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                                                                            <p data-bind="text:serviceCharge">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
                                                                         </div>
-                                                                    </div>
-                                                                    <span class="uib_shim"></span>
+                                                                    </div><span class="uib_shim"></span>
                                                                 </div>
                                                             </div>
 
@@ -1259,27 +1277,27 @@
                                                         <div class="grid urow uib_row_33" data-uib="layout/row" data-ver="0">
                                                             <div class="col uib_col_64 col-2_2-12" data-uib="layout/col" data-ver="0">
                                                                 <div class="widget-container content-area vertical-col">
-                                                                    <div class="tarea widget uib_w_69 d-margins" data-uib="media/text" data-ver="0" name="uib_w_69">
+
+                                                                    <div class="tarea widget uib_w_68 d-margins" data-uib="media/text" data-ver="0" name="uib_w_68">
                                                                         <div class="widget-container left-receptacle"></div>
                                                                         <div class="widget-container right-receptacle"></div>
                                                                         <div class="text-container">
-                                                                            <p><strong>SERVICE CHARGE:</strong>
+                                                                            <p><strong>INTEREST:</strong>
                                                                             </p>
                                                                         </div>
-                                                                    </div>
-                                                                    <span class="uib_shim"></span>
+                                                                    </div><span class="uib_shim"></span>
                                                                 </div>
                                                             </div>
                                                             <div class="col uib_col_65 col-2_10-12" data-uib="layout/col" data-ver="0">
                                                                 <div class="widget-container content-area vertical-col">
-                                                                    <div class="tarea widget uib_w_106 d-margins" data-uib="media/text" data-ver="0" name="uib_w_106">
+
+                                                                    <div class="tarea widget uib_w_105 d-margins" data-uib="media/text" data-ver="0" name="uib_w_105">
                                                                         <div class="widget-container left-receptacle"></div>
                                                                         <div class="widget-container right-receptacle"></div>
                                                                         <div class="text-container">
-                                                                            <p data-bind="text:serviceCharge">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                                                                            <p data-bind="text:interest">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
                                                                         </div>
-                                                                    </div>
-                                                                    <span class="uib_shim"></span>
+                                                                    </div><span class="uib_shim"></span>
                                                                 </div>
                                                             </div>
 
@@ -1305,7 +1323,7 @@
                                                                         <div class="widget-container left-receptacle"></div>
                                                                         <div class="widget-container right-receptacle"></div>
                                                                         <div class="text-container">
-                                                                            <p data-bind="text:netProceeds">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                                                                            <p><strong data-bind="text:netProceeds">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</strong></p>
                                                                         </div>
                                                                     </div>
                                                                     <span class="uib_shim"></span>
@@ -1360,10 +1378,23 @@
                                                             <label class="narrow-control label-top-left">Principal</label>
                                                             <input class="wide-control form-control default" type="text">
                                                         </div>
+                                                        <div class="table-thing widget uib_w_137 d-margins" data-uib="twitter%20bootstrap/input" data-ver="1">
+                                                            <label class="narrow-control label-top-left">Name</label>
+                                                            <input class="wide-control form-control default" type="text">
+                                                        </div>
                                                         <div class="table-thing widget uib_w_136 d-margins" data-uib="twitter%20bootstrap/input" data-ver="1">
                                                             <label class="narrow-control label-top-left">Interest</label>
                                                             <input class="wide-control form-control default" type="text">
                                                         </div>
+                                                        <div class="table-thing widget uib_w_139 d-margins" data-uib="twitter%20bootstrap/input" data-ver="1">
+                                                            <label class="narrow-control label-top-left">Net Proceeds</label>
+                                                            <input class="wide-control form-control default" type="text">
+                                                        </div>
+                                                        <div class="table-thing widget uib_w_140 d-margins" data-uib="twitter%20bootstrap/input" data-ver="1">
+                                                            <label class="narrow-control label-top-left">FL Number</label>
+                                                            <input class="wide-control form-control default" type="text">
+                                                        </div>
+                                                        <button class="btn widget uib_w_142 btn-default d-margins" data-uib="twitter%20bootstrap/button" data-ver="1">Button</button>
                                                         <span class="uib_shim"></span>
                                                     </div>
                                                 </div>
@@ -1396,6 +1427,14 @@
 
                                         <figcaption data-position="bottom"></figcaption>
                                     </figure>
+                                </div>
+                                <div class="tarea widget uib_w_141 d-margins right-txt" data-uib="media/text" data-ver="0" name="uib_w_141">
+                                    <div class="widget-container left-receptacle"></div>
+                                    <div class="widget-container right-receptacle"></div>
+                                    <div class="text-container">
+                                        <p ><strong data-bind="text:flNumber">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</strong>
+                                        </p>
+                                    </div>
                                 </div>
 
                                 <div class="grid urow uib_row_47 grid-pad border" data-uib="layout/row" data-ver="0">
@@ -1475,7 +1514,7 @@
                                                             <div class="widget-container left-receptacle"></div>
                                                             <div class="widget-container right-receptacle"></div>
                                                             <div class="text-container">
-                                                                <p><strong>SUMMARY</strong>
+                                                                <p><em>Computation of Net Proceeds</em>
                                                                 </p>
                                                             </div>
                                                         </div>
@@ -1516,7 +1555,7 @@
                                                                         <div class="widget-container left-receptacle"></div>
                                                                         <div class="widget-container right-receptacle"></div>
                                                                         <div class="text-container">
-                                                                            <p><strong>Service Charge:</strong>
+                                                                            <p><em><strong>Service Charge:</strong></em>
                                                                             </p>
                                                                         </div>
                                                                     </div><span class="uib_shim"></span>
@@ -1546,7 +1585,7 @@
                                                                         <div class="widget-container left-receptacle"></div>
                                                                         <div class="widget-container right-receptacle"></div>
                                                                         <div class="text-container">
-                                                                            <p><strong>Interest:</strong>
+                                                                            <p><em><strong>Interest:</strong></em>
                                                                             </p>
                                                                         </div>
                                                                     </div><span class="uib_shim"></span>
@@ -1574,7 +1613,7 @@
                                                                         <div class="widget-container left-receptacle"></div>
                                                                         <div class="widget-container right-receptacle"></div>
                                                                         <div class="text-container">
-                                                                            <p><strong>Net Proceeds:</strong>
+                                                                            <p><em><strong>NET PROCEEDS:</strong></em>
                                                                             </p>
                                                                         </div>
                                                                     </div>
@@ -1587,7 +1626,8 @@
                                                                         <div class="widget-container left-receptacle"></div>
                                                                         <div class="widget-container right-receptacle"></div>
                                                                         <div class="text-container">
-                                                                            <p data-bind="text:netProceeds">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                                                                            <p><strong data-bind="text:netProceeds">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</strong>
+                                                                            </p>
                                                                         </div>
                                                                     </div>
                                                                     <span class="uib_shim"></span>
@@ -1653,6 +1693,7 @@
                                                                 </p>
                                                             </div>
                                                         </div>
+
                                                         <div class="tarea widget uib_w_92 d-margins center-txt" data-uib="media/text" data-ver="0" name="uib_w_92">
                                                             <div class="widget-container left-receptacle"></div>
                                                             <div class="widget-container right-receptacle"></div>
@@ -1811,67 +1852,83 @@
                     <div class="grid grid-pad urow uib_row_56 row-height-56 print-width" data-uib="layout/row" data-ver="0">
                         <div class="col uib_col_96 col-0" data-uib="layout/col" data-ver="0">
                             <div class="widget-container content-area vertical-col">
-                                <div class="grid urow uib_row_57" data-uib="layout/row" data-ver="0">
-                                    <div class="col uib_col_97 col-1_6-12" data-uib="layout/col" data-ver="0">
+
+                                <div class="grid urow uib_row_67 border grid-pad" data-uib="layout/row" data-ver="0">
+                                    <div class="col uib_col_115 col-1_12-12" data-uib="layout/col" data-ver="0">
                                         <div class="widget-container content-area vertical-col">
-                                            <div class="tarea widget uib_w_112 d-margins" data-uib="media/text" data-ver="0" name="uib_w_112">
+                                            <div class="grid urow uib_row_57" data-uib="layout/row" data-ver="0">
+                                                <div class="col uib_col_97 col-1_6-12" data-uib="layout/col" data-ver="0">
+                                                    <div class="widget-container content-area vertical-col">
+                                                        <div class="tarea widget uib_w_112 d-margins" data-uib="media/text" data-ver="0" name="uib_w_112">
+                                                            <div class="widget-container left-receptacle"></div>
+                                                            <div class="widget-container right-receptacle"></div>
+                                                            <div class="text-container">
+                                                                <p><strong>Date:</strong>
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                        <span class="uib_shim"></span>
+                                                    </div>
+                                                </div>
+                                                <div class="col uib_col_98 col-1_6-12" data-uib="layout/col" data-ver="0">
+                                                    <div class="widget-container content-area vertical-col">
+                                                        <div class="tarea widget uib_w_128 d-margins" data-uib="media/text" data-ver="0" name="uib_w_128">
+                                                            <div class="widget-container left-receptacle"></div>
+                                                            <div class="widget-container right-receptacle"></div>
+                                                            <div class="text-container">
+                                                                <p data-bind="text:date">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                                                            </div>
+                                                        </div>
+                                                        <span class="uib_shim"></span>
+                                                    </div>
+                                                </div>
+
+                                                <span class="uib_shim"></span>
+                                            </div><span class="uib_shim"></span>
+                                            <div class="grid urow uib_row_58" data-uib="layout/row" data-ver="0">
+                                                <div class="col uib_col_99 col-1_6-12" data-uib="layout/col" data-ver="0">
+                                                    <div class="widget-container content-area vertical-col">
+                                                        <div class="tarea widget uib_w_113 d-margins" data-uib="media/text" data-ver="0" name="uib_w_113">
+                                                            <div class="widget-container left-receptacle"></div>
+                                                            <div class="widget-container right-receptacle"></div>
+                                                            <div class="text-container">
+                                                                <p><strong>Client:</strong>
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                        <span class="uib_shim"></span>
+                                                    </div>
+                                                </div>
+                                                <div class="col uib_col_100 col-1_6-12" data-uib="layout/col" data-ver="0">
+                                                    <div class="widget-container content-area vertical-col">
+                                                        <div class="tarea widget uib_w_129 d-margins" data-uib="media/text" data-ver="0" name="uib_w_129">
+                                                            <div class="widget-container left-receptacle"></div>
+                                                            <div class="widget-container right-receptacle"></div>
+                                                            <div class="text-container">
+                                                                <p data-bind="text:client">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                                                            </div>
+                                                        </div>
+                                                        <span class="uib_shim"></span>
+                                                    </div>
+                                                </div>
+
+                                                <span class="uib_shim"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <span class="uib_shim"></span>
+                                </div>
+                                <div class="grid urow uib_row_68 row-height-68 border grid-pad" data-uib="layout/row" data-ver="0">
+                                    <div class="col uib_col_116 col-1_12-12" data-uib="layout/col" data-ver="0">
+                                        <div class="widget-container content-area vertical-col">
+                                            <div class="tarea widget uib_w_143 d-margins" data-uib="media/text" data-ver="0" name="uib_w_143">
                                                 <div class="widget-container left-receptacle"></div>
                                                 <div class="widget-container right-receptacle"></div>
                                                 <div class="text-container">
-                                                    <p><strong>Date:</strong>
+                                                    <p><em>Computation of Net Proceeds</em>
                                                     </p>
                                                 </div>
                                             </div>
-                                            <span class="uib_shim"></span>
-                                        </div>
-                                    </div>
-                                    <div class="col uib_col_98 col-1_6-12" data-uib="layout/col" data-ver="0">
-                                        <div class="widget-container content-area vertical-col">
-                                            <div class="tarea widget uib_w_128 d-margins" data-uib="media/text" data-ver="0" name="uib_w_128">
-                                                <div class="widget-container left-receptacle"></div>
-                                                <div class="widget-container right-receptacle"></div>
-                                                <div class="text-container">
-                                                    <p data-bind="text:date">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                                                </div>
-                                            </div>
-                                            <span class="uib_shim"></span>
-                                        </div>
-                                    </div>
-
-                                    <span class="uib_shim"></span>
-                                </div>
-                                <div class="grid urow uib_row_58" data-uib="layout/row" data-ver="0">
-                                    <div class="col uib_col_99 col-1_6-12" data-uib="layout/col" data-ver="0">
-                                        <div class="widget-container content-area vertical-col">
-                                            <div class="tarea widget uib_w_113 d-margins" data-uib="media/text" data-ver="0" name="uib_w_113">
-                                                <div class="widget-container left-receptacle"></div>
-                                                <div class="widget-container right-receptacle"></div>
-                                                <div class="text-container">
-                                                    <p><strong>Client:</strong>
-                                                    </p>
-                                                </div>
-                                            </div>
-                                            <span class="uib_shim"></span>
-                                        </div>
-                                    </div>
-                                    <div class="col uib_col_100 col-1_6-12" data-uib="layout/col" data-ver="0">
-                                        <div class="widget-container content-area vertical-col">
-                                            <div class="tarea widget uib_w_129 d-margins" data-uib="media/text" data-ver="0" name="uib_w_129">
-                                                <div class="widget-container left-receptacle"></div>
-                                                <div class="widget-container right-receptacle"></div>
-                                                <div class="text-container">
-                                                    <p data-bind="text:client">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                                                </div>
-                                            </div>
-                                            <span class="uib_shim"></span>
-                                        </div>
-                                    </div>
-
-                                    <span class="uib_shim"></span>
-                                </div>
-                                <div class="grid urow uib_row_59" data-uib="layout/row" data-ver="0">
-                                    <div class="col uib_col_101 col-1_12-12" data-uib="layout/col" data-ver="0">
-                                        <div class="widget-container content-area vertical-col">
                                             <div class="grid urow uib_row_60" data-uib="layout/row" data-ver="0">
                                                 <div class="col uib_col_102 col-2_6-12" data-uib="layout/col" data-ver="0">
                                                     <div class="widget-container content-area vertical-col">
@@ -1879,7 +1936,7 @@
                                                             <div class="widget-container left-receptacle"></div>
                                                             <div class="widget-container right-receptacle"></div>
                                                             <div class="text-container">
-                                                                <p><strong>Principal:</strong>
+                                                                <p><em><strong>Principal:</strong></em>
                                                                 </p>
                                                             </div>
                                                         </div>
@@ -1900,60 +1957,31 @@
                                                 </div>
 
                                                 <span class="uib_shim"></span>
-                                            </div>
+                                            </div><span class="uib_shim"></span>
                                             <div class="grid urow uib_row_61" data-uib="layout/row" data-ver="0">
                                                 <div class="col uib_col_104 col-2_6-12" data-uib="layout/col" data-ver="0">
                                                     <div class="widget-container content-area vertical-col">
-                                                        <div class="tarea widget uib_w_115 d-margins" data-uib="media/text" data-ver="0" name="uib_w_115">
-                                                            <div class="widget-container left-receptacle"></div>
-                                                            <div class="widget-container right-receptacle"></div>
-                                                            <div class="text-container">
-                                                                <p><strong>Interest:</strong>
-                                                                </p>
-                                                            </div>
-                                                        </div>
-                                                        <span class="uib_shim"></span>
-                                                    </div>
-                                                </div>
-                                                <div class="col uib_col_105 col-2_6-12" data-uib="layout/col" data-ver="0">
-                                                    <div class="widget-container content-area vertical-col">
-                                                        <div class="tarea widget uib_w_119 d-margins" data-uib="media/text" data-ver="0" name="uib_w_119">
-                                                            <div class="widget-container left-receptacle"></div>
-                                                            <div class="widget-container right-receptacle"></div>
-                                                            <div class="text-container">
-                                                                <p data-bind="text:interest">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                                                            </div>
-                                                        </div>
-                                                        <span class="uib_shim"></span>
-                                                    </div>
-                                                </div>
 
-                                                <span class="uib_shim"></span>
-                                            </div>
-                                            <div class="grid urow uib_row_62" data-uib="layout/row" data-ver="0">
-                                                <div class="col uib_col_106 col-2_6-12" data-uib="layout/col" data-ver="0">
-                                                    <div class="widget-container content-area vertical-col">
                                                         <div class="tarea widget uib_w_116 d-margins" data-uib="media/text" data-ver="0" name="uib_w_116">
                                                             <div class="widget-container left-receptacle"></div>
                                                             <div class="widget-container right-receptacle"></div>
                                                             <div class="text-container">
-                                                                <p><strong>Service Charge:</strong>
+                                                                <p><em><strong>Service Charge:</strong></em>
                                                                 </p>
                                                             </div>
-                                                        </div>
-                                                        <span class="uib_shim"></span>
+                                                        </div><span class="uib_shim"></span>
                                                     </div>
                                                 </div>
-                                                <div class="col uib_col_108 col-2_6-12" data-uib="layout/col" data-ver="0">
+                                                <div class="col uib_col_105 col-2_6-12" data-uib="layout/col" data-ver="0">
                                                     <div class="widget-container content-area vertical-col">
+
                                                         <div class="tarea widget uib_w_120 d-margins" data-uib="media/text" data-ver="0" name="uib_w_120">
                                                             <div class="widget-container left-receptacle"></div>
                                                             <div class="widget-container right-receptacle"></div>
                                                             <div class="text-container">
                                                                 <p data-bind="text:serviceCharge">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
                                                             </div>
-                                                        </div>
-                                                        <span class="uib_shim"></span>
+                                                        </div><span class="uib_shim"></span>
                                                     </div>
                                                 </div>
 
@@ -1962,34 +1990,73 @@
                                             <div class="grid urow uib_row_63" data-uib="layout/row" data-ver="0">
                                                 <div class="col uib_col_109 col-2_6-12" data-uib="layout/col" data-ver="0">
                                                     <div class="widget-container content-area vertical-col">
-                                                        <div class="tarea widget uib_w_117 d-margins" data-uib="media/text" data-ver="0" name="uib_w_117">
+
+                                                        <div class="tarea widget uib_w_115 d-margins" data-uib="media/text" data-ver="0" name="uib_w_115">
                                                             <div class="widget-container left-receptacle"></div>
                                                             <div class="widget-container right-receptacle"></div>
                                                             <div class="text-container">
-                                                                <p><strong>Net Proceeds:</strong>
+                                                                <p><em><strong>Interest:</strong></em>
                                                                 </p>
                                                             </div>
-                                                        </div>
-                                                        <span class="uib_shim"></span>
+                                                        </div><span class="uib_shim"></span>
                                                     </div>
                                                 </div>
                                                 <div class="col uib_col_110 col-2_6-12" data-uib="layout/col" data-ver="0">
                                                     <div class="widget-container content-area vertical-col">
-                                                        <div class="tarea widget uib_w_121 d-margins" data-uib="media/text" data-ver="0" name="uib_w_121">
+
+                                                        <div class="tarea widget uib_w_119 d-margins" data-uib="media/text" data-ver="0" name="uib_w_119">
                                                             <div class="widget-container left-receptacle"></div>
                                                             <div class="widget-container right-receptacle"></div>
                                                             <div class="text-container">
-                                                                <p data-bind="text:netProceeds">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                                                                <p data-bind="text:interest">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
                                                             </div>
-                                                        </div>
-                                                        <span class="uib_shim"></span>
+                                                        </div><span class="uib_shim"></span>
                                                     </div>
                                                 </div>
 
                                                 <span class="uib_shim"></span>
                                             </div>
+                                            <div class="grid urow uib_row_62" data-uib="layout/row" data-ver="0">
+                                                <div class="col uib_col_106 col-2_6-12" data-uib="layout/col" data-ver="0">
+                                                    <div class="widget-container content-area vertical-col">
+
+                                                        <div class="tarea widget uib_w_117 d-margins" data-uib="media/text" data-ver="0" name="uib_w_117">
+                                                            <div class="widget-container left-receptacle"></div>
+                                                            <div class="widget-container right-receptacle"></div>
+                                                            <div class="text-container">
+                                                                <p><em><strong>NET PROCEEDS:</strong></em>
+                                                                </p>
+                                                            </div>
+                                                        </div><span class="uib_shim"></span>
+                                                    </div>
+                                                </div>
+                                                <div class="col uib_col_108 col-2_6-12" data-uib="layout/col" data-ver="0">
+                                                    <div class="widget-container content-area vertical-col">
+
+                                                        <div class="tarea widget uib_w_121 d-margins" data-uib="media/text" data-ver="0" name="uib_w_121">
+                                                            <div class="widget-container left-receptacle"></div>
+                                                            <div class="widget-container right-receptacle"></div>
+                                                            <div class="text-container">
+                                                                <p ><strong data-bind="text:netProceeds">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</strong>
+                                                                </p>
+                                                            </div>
+                                                        </div><span class="uib_shim"></span>
+                                                    </div>
+                                                </div>
+
+                                                <span class="uib_shim"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <span class="uib_shim"></span>
+                                </div>
+
+                                <div class="grid urow uib_row_59" data-uib="layout/row" data-ver="0">
+                                    <div class="col uib_col_101 col-1_12-12" data-uib="layout/col" data-ver="0">
+                                        <div class="widget-container content-area vertical-col">
 
                                             <span class="uib_shim"></span>
+
                                         </div>
                                     </div>
                                     <span class="uib_shim"></span>
