@@ -34,7 +34,13 @@ function ViewSubPage() {
     }
 
     self.deleteTransaction = function () {
+        notification.confirm("Are you sure do you want to delete this?", function () {
+            deleteTransaction();
+        }, 'Delete', 'Yes, delete it!');
 
+    }
+
+    function deleteTransaction() {
         html5sql.process(
             "DELETE FROM transactiondetails WHERE transactiondetails.transactionID = '" + transactionData.id + "' ; DELETE FROM transactions WHERE transactions.id = '" + transactionData.id + "' ;",
             function (tx, results) {
@@ -46,6 +52,7 @@ function ViewSubPage() {
             }
         );
     }
+
     self.printTransaction = function () {
 
         printPage.load(transactionData, transactionDetails, "#viewSubPage");

@@ -121,7 +121,6 @@ function PrintPage() {
         };
 
         var theCompiledHtml = theTemplate(wrapper);
-        console.log(theCompiledHtml)
         $('.printDetails').html(theCompiledHtml);
 
 
@@ -158,7 +157,6 @@ function PrintPage() {
         };
 
         var theCompiledHtml = theTemplate(wrapper);
-        console.log(theCompiledHtml)
         $('.printDetails2').html(theCompiledHtml);
 
     }

@@ -8,8 +8,8 @@ function TransactionsListSubPage() {
     self.client = ko.observable('');
 
     self.load = function () {
-        self.getData();
         activate_subpage("#transactionsListSubPage");
+        self.getData();
     }
 
     function getMyTeamSQL() {
