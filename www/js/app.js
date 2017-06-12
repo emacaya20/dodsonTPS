@@ -108,6 +108,23 @@ function formatDate(date) {
         dd = "0" + dd;
     }
 
+    dateFormat = mm + "/" + dd + "/" +  yyyy ;
+    return dateFormat;
+}
+
+function formatDate1(date) {
+    var dateFormat = new Date(date);
+    var yyyy = dateFormat.getFullYear();
+    var mm = dateFormat.getMonth() + 1;
+    var dd = dateFormat.getDate();
+
+    if (mm <= 9) {
+        mm = "0" + mm;
+    }
+    if (dd <= 9) {
+        dd = "0" + dd;
+    }
+
     dateFormat = yyyy + "-" + mm + "-" + dd;
     return dateFormat;
 }
@@ -228,12 +245,14 @@ function createHeader() {
         "id INTEGER PRIMARY KEY" +
         ", date DATE" +
         ", client VARCHAR(200)" +
+        ", clientType VARCHAR(100)" +
         ", type VARCHAR(100)" +
         ", flNumber VARCHAR(100)" +
         ", principal DOUBLE(11,11)" +
         ", interest DOUBLE(11,11)" +
         ", serviceCharge INT(20)" +
         ", netProceeds DOUBLE(11,11)" +
+        ", days INT(10)" +
         ");";
     return sql;
 }
@@ -251,6 +270,7 @@ function createDetails() {
         ", checkNo VARCHAR(75)" +
         ", date DATE" +
         ", days INT(10)" +
+        ", interest INT(10)" +
         ");";
     return sql;
 }
@@ -287,6 +307,6 @@ function dropTransactionDetails() {
     return sql;
 }
 
-function formatNumber(x){
-    return x.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+function formatNumber(x) {
+    return x.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }

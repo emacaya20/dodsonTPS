@@ -20,10 +20,10 @@ function ViewSubPage() {
         self.date(data.date);
         self.client(data.client);
         self.type(data.type);
-        self.principal(data.principal);
-        self.interest(data.interest);
-        self.serviceCharge(data.serviceCharge);
-        self.netProceeds(data.netProceeds);
+        self.principal(formatNumber(data.principal));
+        self.interest(formatNumber(data.interest));
+        self.serviceCharge(formatNumber(data.serviceCharge));
+        self.netProceeds(formatNumber(data.netProceeds));
 
         self.getData(data.id);
         activate_subpage("#viewSubPage");
@@ -133,6 +133,9 @@ function ViewSubPage() {
             columns: [
                 {
                     "data": 'amount',
+                    "render": function (amount, type, full, meta) {
+                        return formatNumber(amount);
+                    }
                     },
                 {
                     "data": 'accountName'

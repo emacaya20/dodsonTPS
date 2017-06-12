@@ -15,6 +15,7 @@ function ComputeSubPage() {
     var serviceCharge = 0;
     var principal = 0;
     var netProceeds = 0;
+    var days = 0;
     var headerData = [];
     var headerDetails = [];
 
@@ -41,11 +42,15 @@ function ComputeSubPage() {
             }
         }
         console.log(self.rate())
-        if (same == true) {
+        if (same == true && headerData.type == "Dated") {
+            days = headerDetails[0].days;
             interest = Math.round((((principal * self.rate()) * headerDetails[0].days) / 30) + 10);
         } else {
+
             for (var index = 0; index < headerDetails.length; index++) {
-                interest = interest + (((principal * self.rate()) * headerDetails[index].days) / 30);
+                var rate = Math.round(((headerDetails[index].amount * self.rate()) * headerDetails[index].days) / 30);
+                headerDetails[index].interest = rate;
+                interest = interest + (((headerDetails[index].amount * self.rate()) * headerDetails[index].days) / 30);
             }
             interest = Math.round(interest + 10);
         }
@@ -121,10 +126,10 @@ function ComputeSubPage() {
         serviceCharge = Math.round(sc * self.scDenom());
 
         netProceeds = Math.round(principal - serviceCharge - Math.round(interest));
-        self.principal(formatNumber(principal));
-        self.sc(formatNumber(serviceCharge));
-        self.interest(formatNumber(interest));
-        self.netProceeds(formatNumber(netProceeds));
+        self.principal("P " + formatNumber(principal));
+        self.sc("P " + formatNumber(serviceCharge));
+        self.interest("P " + formatNumber(interest));
+        self.netProceeds("P " + formatNumber(netProceeds));
 
     }
 
@@ -154,16 +159,19 @@ function ComputeSubPage() {
         headerData.interest = interest;
         headerData.serviceCharge = serviceCharge;
         headerData.netProceeds = netProceeds;
+        headerData.days = days;
         var sql = new Array();
-        transactions = "INSERT INTO transactions (date, client, type, principal, interest, serviceCharge, netProceeds, flNumber) VALUES (" +
-            "'" + headerData.date + "'," +
+        transactions = "INSERT INTO transactions (date, client, clientType, type, principal, interest, serviceCharge, netProceeds, days, flNumber) VALUES (" +
+            "'" + formatDate(headerData.date) + "'," +
             "'" + headerData.client + "'," +
+            "'" + headerData.clientType + "'," +
             "'" + headerData.type + "'," +
             "'" + principal + "'," +
             "'" + interest + "'," +
             "'" + serviceCharge + "'," +
             "'" + netProceeds + "'," +
-            "'" + headerData.flNumber + "'"+
+            "'" + days + "'," +
+            "'" + headerData.flNumber + "'" +
             ");";
         sql.push(transactions);
 
@@ -175,7 +183,7 @@ function ComputeSubPage() {
         for (var index = 0; index < headerDetails.length; index++) {
 
 
-            transactiondetails = "INSERT INTO transactiondetails (transactionID, amount, accountName, accountNumber, bank, branch, checkNo, date, days) VALUES (" +
+            transactiondetails = "INSERT INTO transactiondetails (transactionID, amount, accountName, accountNumber, bank, branch, checkNo, date, days, interest) VALUES (" +
                 "'" + id + "'," +
                 "'" + headerDetails[index].amount + "'," +
                 "'" + headerDetails[index].accountName + "'," +
@@ -183,8 +191,9 @@ function ComputeSubPage() {
                 "'" + headerDetails[index].bank + "'," +
                 "'" + headerDetails[index].branch + "', " +
                 "'" + headerDetails[index].checkNo + "', " +
-                "'" + headerDetails[index].date + "', " +
-                "'" + headerDetails[index].days + "'" +
+                "'" + formatDate(headerDetails[index].date) + "', " +
+                "'" + headerDetails[index].days + "', " +
+                "'" + headerDetails[index].interest + "'" +
 
                 ");";
             sql.push(transactiondetails);
@@ -192,8 +201,8 @@ function ComputeSubPage() {
         return sql;
     }
 
-    function print(){
-        printPage.load(headerData, headerDetails,"#computeSubPage" );
+    function print() {
+        printPage.load(headerData, headerDetails, "#computeSubPage");
     }
 
     self.back = function () {

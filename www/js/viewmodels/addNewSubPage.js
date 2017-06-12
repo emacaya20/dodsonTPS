@@ -12,7 +12,7 @@ function AddNewSubPage() {
         index = 0;
         details = [];
         activate_subpage("#addNewSubPage");
-        self.date(formatDate(new Date()));
+        self.date(formatDate1(new Date()));
         self.addCheck();
         self.client('');
 
@@ -50,7 +50,7 @@ function AddNewSubPage() {
         });
         index++;
         var theTemplateScript = $("#checkdetails-template").html();
-//console.log(theTemplateScript)
+        //console.log(theTemplateScript)
         var theTemplate = Handlebars.compile(theTemplateScript);
 
         // Pass our data to the template
@@ -60,7 +60,7 @@ function AddNewSubPage() {
 
         //console.log("theCompiledHtml:");
         var theCompiledHtml = theTemplate(wrapper);
-console.log(theCompiledHtml)
+        console.log(theCompiledHtml)
         $('.checkdetails').html(theCompiledHtml);
 
 
@@ -89,14 +89,15 @@ console.log(theCompiledHtml)
         }
         console.log(details);
         var header = {
-            "date":self.date(),
-            "client":self.client(),
-            "type":self.clientType(),
-            "flNumber":'',
-            "principal":'',
-            "interest":'',
-            "serviceCharge":'',
-            "netProceeds":''
+            "date": self.date(),
+            "client": self.client(),
+            "clientType": self.clientType(),
+            "type": self.transactionType(),
+            "flNumber": '',
+            "principal": '',
+            "interest": '',
+            "serviceCharge": '',
+            "netProceeds": ''
         }
         computeSubPage.load(header, details);
     }

@@ -13,6 +13,7 @@ function PrintPage() {
     self.interest = ko.observable('');
     self.serviceCharge = ko.observable('');
     self.netProceeds = ko.observable('');
+    self.days = ko.observable('');
     self.flNumber = ko.observable('');
 
     self.load = function (headerData, headerDetails, prevpage) {
@@ -24,12 +25,13 @@ function PrintPage() {
         console.log(headerData)
         console.log(headerDetails)
         activate_subpage("#print1");
-        self.date(transactionData.date);
+        self.date(formatDate(transactionData.date));
         self.client(transactionData.client);
-        self.principal("P "+formatNumber(transactionData.principal));
-        self.interest("P "+formatNumber(transactionData.interest));
-        self.serviceCharge("P "+formatNumber(transactionData.serviceCharge));
-        self.netProceeds("P "+formatNumber(transactionData.netProceeds));
+        self.principal("P " + formatNumber(transactionData.principal));
+        self.interest("P " + formatNumber(transactionData.interest));
+        self.serviceCharge("P " + formatNumber(transactionData.serviceCharge));
+        self.netProceeds("P " + formatNumber(transactionData.netProceeds));
+        self.days(transactionData.days);
         self.flNumber(transactionData.flNumber);
         self.print1();
     }
@@ -49,7 +51,7 @@ function PrintPage() {
 
         if (currentPage == "print1") {
 
-//            currentPage = "computeSubPage";
+            //            currentPage = "computeSubPage";
             activate_subpage(previousPage);
         } else {
             index = 0;
@@ -99,7 +101,17 @@ function PrintPage() {
             index = i;
             details.push(transactionDetails[i]);
         }
-        var theTemplateScript = $("#printDetails-template").html();
+        for (var i = 0; i < details.length; i++) {
+            var newAmount  = formatNumber(details[i].amount);
+            var newDate  = formatDate(details[i].date);
+            details[i].date = newDate;
+            details[i].amount = newAmount;
+        }
+        if (transactionData.type == "Dated") {
+            var theTemplateScript = $("#printDetails-template").html();
+        } else {
+            var theTemplateScript = $("#postdated-printDetails-template").html();
+        }
 
         var theTemplate = Handlebars.compile(theTemplateScript);
 
@@ -125,8 +137,19 @@ function PrintPage() {
             index = i;
             details.push(transactionDetails[i]);
         }
-        var theTemplateScript = $("#printDetails2-template").html();
 
+        for (var i = 0; i < details.length; i++) {
+            var newAmount  = formatNumber(details[i].amount);
+            var newDate  = formatDate(details[i].date);
+            details[i].date = newDate;
+            details[i].amount = newAmount;
+        }
+
+        if (transactionData.type == "Dated") {
+            var theTemplateScript = $("#printDetails-template").html();
+        } else {
+            var theTemplateScript = $("#postdated-printDetails-template").html();
+        }
         var theTemplate = Handlebars.compile(theTemplateScript);
 
         // Pass our data to the template

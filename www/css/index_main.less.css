@@ -1704,7 +1704,7 @@ label:empty {
 }
 @media all and (min-width: 0px) {
   .uib_col_49 {
-    width: 50%;
+    width: 34%;
   }
   .urow.cright > .uib_col_49 {
     padding-left: 0px !important;
@@ -1714,7 +1714,7 @@ label:empty {
     padding-left: 0px !important;
   }
   .uib_col_50 {
-    width: 50%;
+    width: 66%;
   }
   .urow:not(.cright) > .uib_col_50 {
     padding-right: 0px !important;
@@ -1725,14 +1725,14 @@ label:empty {
   }
 }
 @media all and (max-width: 0px) {
-  .col-2_6-12 {
+  .col-2_4-12 {
     width: auto;
     float: none !important;
     clear: both;
     padding-left: 0px !important;
     padding-right: 0px !important;
   }
-  .col-2_6-12 {
+  .col-2_8-12 {
     width: auto;
     float: none !important;
     clear: both;
@@ -1845,7 +1845,7 @@ label:empty {
 }
 @media all and (min-width: 0px) {
   .uib_col_55 {
-    width: 50%;
+    width: 17%;
   }
   .urow.cright > .uib_col_55 {
     padding-left: 0px !important;
@@ -1855,7 +1855,7 @@ label:empty {
     padding-left: 0px !important;
   }
   .uib_col_56 {
-    width: 50%;
+    width: 83%;
   }
   .urow:not(.cright) > .uib_col_56 {
     padding-right: 0px !important;
@@ -1866,14 +1866,14 @@ label:empty {
   }
 }
 @media all and (max-width: 0px) {
-  .col-3_6-12 {
+  .col-3_2-12 {
     width: auto;
     float: none !important;
     clear: both;
     padding-left: 0px !important;
     padding-right: 0px !important;
   }
-  .col-3_6-12 {
+  .col-3_10-12 {
     width: auto;
     float: none !important;
     clear: both;
@@ -1892,7 +1892,7 @@ label:empty {
 }
 @media all and (min-width: 0px) {
   .uib_col_57 {
-    width: 50%;
+    width: 17%;
   }
   .urow.cright > .uib_col_57 {
     padding-left: 0px !important;
@@ -1902,7 +1902,7 @@ label:empty {
     padding-left: 0px !important;
   }
   .uib_col_58 {
-    width: 50%;
+    width: 83%;
   }
   .urow:not(.cright) > .uib_col_58 {
     padding-right: 0px !important;
@@ -1913,14 +1913,14 @@ label:empty {
   }
 }
 @media all and (max-width: 0px) {
-  .col-3_6-12 {
+  .col-3_2-12 {
     width: auto;
     float: none !important;
     clear: both;
     padding-left: 0px !important;
     padding-right: 0px !important;
   }
-  .col-3_6-12 {
+  .col-3_10-12 {
     width: auto;
     float: none !important;
     clear: both;

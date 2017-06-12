@@ -15,7 +15,7 @@ function TransactionsListSubPage() {
     function getMyTeamSQL() {
         var sql = '';
         sql = "SELECT * FROM transactions  order by date desc, id;"
-//        sql = "SELECT * FROM myTeam WHERE myTeam.processingDate = '" + localStorage.processingDate + "' order by status desc, employeeCode;"
+            //        sql = "SELECT * FROM myTeam WHERE myTeam.processingDate = '" + localStorage.processingDate + "' order by status desc, employeeCode;"
         return sql;
     }
 
@@ -98,13 +98,44 @@ function TransactionsListSubPage() {
         });
     }
 
-    self.home=function(){
+    self.home = function () {
         activate_subpage("#homeSubPage");
     }
-    self.add=function(){
+
+    self.add = function () {
         addNewSubPage.load();
     }
-    self.search=function(){
 
+    self.search = function () {
+        var filter = "";
+
+        if (self.client() != "" && self.dateFrom() == "" && self.dateTo() == "") {
+            filter = "where client='" + self.client() + "'";
+        } else if (self.client() != "" && self.dateFrom() != "" && self.dateTo() == "") {
+            filter = "where client='" + self.client() + "' AND date>='" + self.dateFrom() + "' ";
+
+        }else if (self.client() != "" && self.dateFrom() != "" && self.dateTo() != "") {
+            filter = "where client='" + self.client() + "' AND date>='" + self.dateFrom() + "' AND date<='" + self.dateTo() + "' ";
+
+        }else if (self.client() == "" && self.dateFrom() != "" && self.dateTo() != "") {
+            filter = "where date>='" + self.dateFrom() + "' AND date<='" + self.dateTo() + "' ";
+
+        }else if (self.client() == "" && self.dateFrom() != "" && self.dateTo() == "") {
+            filter = "where date>='" + self.dateFrom() + "' ";
+
+        }else if (self.client() == "" && self.dateFrom() == "" && self.dateTo() != "") {
+            filter = "where  date<='" + self.dateTo() + "' ";
+
+        }
+        html5sql.process(
+            "SELECT * FROM transactions " + filter + " order by date desc, id ;",
+            function (tx, results) {
+                console.log(results.rows);
+                self.generateTable(results.rows);
+            },
+            function (error, statement) {
+                console.error("Error: " + error.message + " when processing " + statement);
+            }
+        );
     }
 }
