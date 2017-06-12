@@ -99,7 +99,12 @@ function AddNewSubPage() {
             "serviceCharge": '',
             "netProceeds": ''
         }
-        computeSubPage.load(header, details);
+
+        if (self.clientType() == "Special") {
+            specialClientSubPage.load(header, details);
+        } else {
+            computeSubPage.load(header, details);
+        }
     }
 
     self.back = function () {

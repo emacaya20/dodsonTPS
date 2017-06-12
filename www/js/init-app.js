@@ -35,6 +35,7 @@ var computeSubPage = new ComputeSubPage();
 var transactionsListSubPage = new TransactionsListSubPage();
 var viewSubPage = new ViewSubPage();
 var printPage = new PrintPage();
+var specialClientSubPage = new SpecialClientSubPage();
 
 // App init point (runs on custom app.Ready event from init-dev.js).
 // Runs after underlying device native code and webview/browser is ready.
@@ -51,6 +52,7 @@ app.initEvents = function () {
     ko.applyBindings(transactionsListSubPage, document.getElementById("transactionsListSubPage"));
     ko.applyBindings(viewSubPage, document.getElementById("viewSubPage"));
     ko.applyBindings(printPage, document.getElementById("printPage"));
+    ko.applyBindings(specialClientSubPage, document.getElementById("specialClientSubPage"));
 //    resetDB();
     initDB();
 //    hideLoader();

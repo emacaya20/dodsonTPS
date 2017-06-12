@@ -31,7 +31,7 @@ function PrintPage() {
         self.interest("P " + formatNumber(transactionData.interest));
         self.serviceCharge("P " + formatNumber(transactionData.serviceCharge));
         self.netProceeds("P " + formatNumber(transactionData.netProceeds));
-        self.days(transactionData.days);
+        self.days(transactionData.days + " days");
         self.flNumber(transactionData.flNumber);
         self.print1();
     }

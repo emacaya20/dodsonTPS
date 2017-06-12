@@ -134,24 +134,28 @@ function ComputeSubPage() {
     }
 
     self.save = function () {
-        html5sql.process(
-            insertTransactionHeader(),
-            function (tx, results) {
-                console.log(results);
-                html5sql.process(
-                    insertTransactionHeaderDetails(results.insertId),
-                    function (tx, results) {
-                        notification.alert("Transaction saved!", 'success', "Sucess", "OK");
-                        print();
-                        hideLoader();
-                    },
-                    function (error, statement) {
-                        console.error("Error: " + error.message + " when processing " + statement);
-                    });
-            },
-            function (error, statement) {
-                console.error("Error: " + error.message + " when processing " + statement);
-            });
+        if (self.flNumber() == "") {
+            notification.alert("Enter FL Number!", 'error', "Error", "OK");
+        } else {
+            html5sql.process(
+                insertTransactionHeader(),
+                function (tx, results) {
+                    console.log(results);
+                    html5sql.process(
+                        insertTransactionHeaderDetails(results.insertId),
+                        function (tx, results) {
+                            notification.alert("Transaction saved!", 'success', "Sucess", "OK");
+                            print();
+                            hideLoader();
+                        },
+                        function (error, statement) {
+                            console.error("Error: " + error.message + " when processing " + statement);
+                        });
+                },
+                function (error, statement) {
+                    console.error("Error: " + error.message + " when processing " + statement);
+                });
+        }
     }
 
     function insertTransactionHeader() {
@@ -160,6 +164,7 @@ function ComputeSubPage() {
         headerData.serviceCharge = serviceCharge;
         headerData.netProceeds = netProceeds;
         headerData.days = days;
+        headerData.flNumber = self.flNumber();
         var sql = new Array();
         transactions = "INSERT INTO transactions (date, client, clientType, type, principal, interest, serviceCharge, netProceeds, days, flNumber) VALUES (" +
             "'" + formatDate(headerData.date) + "'," +
