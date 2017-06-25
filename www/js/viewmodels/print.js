@@ -25,15 +25,29 @@ function PrintPage() {
         console.log(headerData)
         console.log(headerDetails)
         activate_subpage("#print1");
+        clearFields();
         self.date(formatDate(transactionData.date));
         self.client(transactionData.client);
         self.principal("P " + formatNumber(transactionData.principal));
         self.interest("P " + formatNumber(transactionData.interest));
         self.serviceCharge("P " + formatNumber(transactionData.serviceCharge));
         self.netProceeds("P " + formatNumber(transactionData.netProceeds));
-        self.days(transactionData.days + " days");
+        if (transactionData.days > 0) {
+            self.days(transactionData.days + " days");
+        }
         self.flNumber(transactionData.flNumber);
         self.print1();
+    }
+
+    function clearFields() {
+        self.date('');
+        self.client('');
+        self.principal('');
+        self.interest('');
+        self.serviceCharge('');
+        self.netProceeds('');
+        self.days('');
+        self.flNumber('');
     }
 
 
@@ -102,8 +116,8 @@ function PrintPage() {
             details.push(transactionDetails[i]);
         }
         for (var i = 0; i < details.length; i++) {
-            var newAmount  = formatNumber(details[i].amount);
-            var newDate  = formatDate(details[i].date);
+            var newAmount = formatNumber(details[i].amount);
+            var newDate = formatDate(details[i].date);
             details[i].date = newDate;
             details[i].amount = newAmount;
         }
@@ -138,8 +152,8 @@ function PrintPage() {
         }
 
         for (var i = 0; i < details.length; i++) {
-            var newAmount  = formatNumber(details[i].amount);
-            var newDate  = formatDate(details[i].date);
+            var newAmount = formatNumber(details[i].amount);
+            var newDate = formatDate(details[i].date);
             details[i].date = newDate;
             details[i].amount = newAmount;
         }

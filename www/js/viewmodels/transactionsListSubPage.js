@@ -84,7 +84,17 @@ function TransactionsListSubPage() {
                 {
                     "data": 'type'
                     }
-                ]
+                ],
+                "tableTools": {
+                    "sSwfPath": "./swf/copy_csv_xls_pdf.swf",
+                    "aButtons": [
+                             {
+                                 "sExtends": "csv",
+                                 "sButtonText": "Export"
+                             }
+
+                         ]
+                }
         });
 
         $('#transactionsListTable tbody').on('click', 'tr', function () {

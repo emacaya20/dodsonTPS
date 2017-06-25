@@ -31,6 +31,7 @@ function ComputeSubPage() {
         serviceCharge = 0;
         interest = 0;
         netProceeds = 0;
+        days = 0;
 
         for (var index = 0; index < headerDetails.length; index++) {
             principal = principal + headerDetails[index].amount;
@@ -196,7 +197,7 @@ function ComputeSubPage() {
                 "'" + headerDetails[index].bank + "'," +
                 "'" + headerDetails[index].branch + "', " +
                 "'" + headerDetails[index].checkNo + "', " +
-                "'" + formatDate(headerDetails[index].date) + "', " +
+                "'" + headerDetails[index].date + "', " +
                 "'" + headerDetails[index].days + "', " +
                 "'" + headerDetails[index].interest + "'" +
 
