@@ -26,6 +26,7 @@ function PrintPage() {
         console.log(headerDetails)
         activate_subpage("#print1");
         clearFields();
+
         self.date(formatDate(transactionData.date));
         self.client(transactionData.client);
         self.principal("P " + formatNumber(transactionData.principal));
@@ -116,7 +117,13 @@ function PrintPage() {
             details.push(transactionDetails[i]);
         }
         for (var i = 0; i < details.length; i++) {
-            var newAmount = formatNumber(details[i].amount);
+            if (isNaN(details[i].amount) == false) {
+
+                var newAmount = formatNumber(Number(details[i].amount));
+            } else {
+                var newAmount = details[i].amount;
+            }
+
             var newDate = formatDate(details[i].date);
             details[i].date = newDate;
             details[i].amount = newAmount;

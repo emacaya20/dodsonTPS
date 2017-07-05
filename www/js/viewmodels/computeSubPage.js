@@ -20,8 +20,27 @@ function ComputeSubPage() {
     var headerDetails = [];
 
     self.load = function (header, details) {
+        headerData = [];
+        headerDetails = [];
+
         headerData = header;
         headerDetails = details;
+
+        principal = 0;
+        sc = 0;
+        serviceCharge = 0;
+        interest = 0;
+        netProceeds = 0;
+        days = 0;
+
+        self.flNumber('');
+        self.scDenom('3');
+        self.rate('0.05');
+        self.principal('');
+        self.sc('');
+        self.interest('');
+        self.netProceeds('');
+
         activate_subpage("#computeSubPage");
     }
 
@@ -56,7 +75,7 @@ function ComputeSubPage() {
             interest = Math.round(interest + 10);
         }
 
-        if (principal == 1000 && principal <= 10000) {
+        if (principal == 1000 || principal <= 10000) {
             sc = 220;
         } else if (principal >= 10001 && principal <= 20000) {
             sc = 270;
