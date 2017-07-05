@@ -67,6 +67,35 @@ function AddNewSubPage() {
 
     }
 
+    self.deleteRow = function (id) {
+        var newDetails = [];
+        index = 0;
+        for (var i = 0; i < details.length; i++) {
+            if (details[i].id != id) {
+                details[i].id = index;
+                index++;
+                newDetails.push(details[i]);
+            }
+        }
+        details = newDetails;
+
+        var theTemplateScript = $("#checkdetails-template").html();
+        //console.log(theTemplateScript)
+        var theTemplate = Handlebars.compile(theTemplateScript);
+
+        // Pass our data to the template
+        var wrapper = {
+            "check": details
+        };
+
+        //console.log("theCompiledHtml:");
+        var theCompiledHtml = theTemplate(wrapper);
+        console.log(theCompiledHtml)
+        $('.checkdetails').html(theCompiledHtml);
+
+
+    }
+
     self.next = function () {
 
         for (var i = 0; i < details.length; i++) {
