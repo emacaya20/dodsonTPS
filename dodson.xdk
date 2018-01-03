@@ -6,7 +6,7 @@
       "projectTypeName": "com.intel.xdk.projecttype.webapp",
       "src": "webapp/template-blank-ad-project/sample.zip",
       "projectGuid": "b1c10e6c-9456-4ec5-8821-a9ec96682c2b",
-      "lastModifiedDate": 1494945774555,
+      "lastModifiedDate": 1499246489812,
       "creationDate": 1494943453748
     },
     "XDK-app-designer": "true",
@@ -40,7 +40,7 @@
           "android-signed": true
         },
         "isActive_": true,
-        "certificateId_": "OgI4DOASDUiXow2SvqdzNQ2",
+        "certificateId_": "",
         "cordovaCLIVersion_": "6.2.0",
         "crosswalkVersion_": "19",
         "appName_": "dodson",
